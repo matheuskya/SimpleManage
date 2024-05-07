@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from main.forms import LoginForm
+from main.forms import LoginForm, ClienteForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
+from main.models import Cliente
 
 # Create your views here.
 
@@ -34,7 +35,20 @@ def index(request):
 
 
 def cliente(request):
-    context = {
-                
-    }
-    return render(request, 'main/cliente.html')
+    cliente_form = ClienteForm()
+    cliente_list = Cliente.objects.all()
+
+    if (request.method == 'POST'):
+        cliente_form = ClienteForm(request.POST)
+        if cliente_form.is_valid():
+            cliente = cliente_form.save(commit=False)
+            cliente.user = request.user
+            cliente.save()
+            return redirect('index')
+
+    else:
+        context = {
+            "cliente_form":cliente_form,
+            "cliente_list":cliente_list,
+        }
+        return render(request, 'main/cliente.html', context)

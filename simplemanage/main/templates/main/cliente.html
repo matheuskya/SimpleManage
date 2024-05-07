@@ -5,7 +5,42 @@
 {%include 'navbar.html'%}
 {%endblock navbar%}
 
+{%block title%}
+Clientes
+{%endblock title%}
 
 {%block content%}
-<h1> cliente</h1>
+
+
+<h3 align="center">Cliente</h1>
+<div align="right">
+<a class='h3'><i class="bi bi-plus-square-fill h3"></i></a>
+<div>
+<div class="row justify-content-center">
+<table>
+<thead>
+	<tr>
+		<th>#</th>
+		<th>Nome</th>
+		<th>Descricao</th>
+		<th>Valor</th>
+	</tr>
+</thead>
+<tbody>
+	{%for cliente in cliente_list%}
+		<tr>
+			<td scope="row">{{cliente.id}}</td>
+			<td scope="row">{{cliente.name}}</td>
+			<td scope="row">{{cliente.description}}</td>
+			<td scope="row">{{cliente.value}}</td>
+		</tr>
+	{%endfor%}
+</tbody>
+</table>
+</div>
+<!-- <form method="POST" accept-charet="utf-8">
+	{%csrf_token%}
+	{{cliente_form.as_p}}
+	<input type='submit' value='Cadastrar' class='btn btn-primary'>
+</form> -->
 {%endblock content%}
