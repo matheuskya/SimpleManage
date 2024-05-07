@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from main.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import auth
 
 # Create your views here.
 
@@ -10,8 +11,6 @@ def login(request):
     login_form = LoginForm()
     if (request.method == "POST"):
         login_form = LoginForm(request, data=request.POST)
-        print("PRINTTTTTTTT")
-        print(login_form)
 
         if login_form.is_valid():
             username = request.POST.get('username')
