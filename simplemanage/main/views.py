@@ -31,3 +31,10 @@ def index(request):
 
     }
     return render(request, 'main/index.html', context)
+
+
+def cliente(request):
+    context = {
+                
+    }
+    return render(request, 'main/cliente.html')
