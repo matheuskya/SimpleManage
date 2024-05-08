@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block navbar%}
+{%include "navbar.html"%}
+{%endblock navbar%}
+
+{%block title%}
+Deletar cliente
+{%endblock title%}
+
+{%block content%}
+<h3 align="center">Deletar Cliente</h3>
+
+<div align="center" class="p-5">
+<form method="POST" accept-charset="utf-8">
+	{%csrf_token%}
+	<p>Você tem certeza que deseja deletar o cliente "{{object}}"</p>
+	{{form.as_p}}
+	<a class='btn btn-danger' href='{%url "cliente"%}'>
+		<i class="bi bi-x-lg"></i>
+	</a>
+
+	<button type="submit" class='btn btn-success' value="Sim">
+		<i class="bi bi-check-lg"></i>
+	</button>
+</form>
+</div>
+{%endblock content%}

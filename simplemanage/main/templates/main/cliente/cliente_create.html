@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{%block navbar%}
+{%include "navbar.html"%}
+{%endblock navbar%}
+
+{%block title%}
+Criar cliente
+{%endblock title%}
+
+{%block content%}
+<h3 align="center">Cadastrar Cliente</h3>
+
+<div align="center" class="p-5">
+<form method="POST" accept-charset="utf-8">
+	{%csrf_token%}
+	{{form.as_p}}
+	<input type="submit" class='btn btn-primary' value="Cadastrar">
+</form>
+</div>
+{%endblock content%}
