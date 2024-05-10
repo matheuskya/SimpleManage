@@ -15,7 +15,9 @@ Editar cliente
 <form method="POST" accept-charset="utf-8">
 	{%csrf_token%}
 	{{form.as_p}}
-	<input type="submit" class='btn btn-primary' value="Cadastrar">
+	<a class='btn btn-secondary' href="{%url 'cliente'%}">Voltar</a>
+	<input type="submit" class='btn btn-primary' value="Salvar">
+
 </form>
 </div>
 {%endblock content%}
