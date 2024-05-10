@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+import datetime
 
 # Create your views here.
 
@@ -39,8 +40,11 @@ def logout_view(request):
 
 @login_required(login_url='login')
 def index(request):
+    date = datetime.datetime.now()
+    datestr = date.strftime("%c")
+    print(datestr)
     context = {
-
+        "datestr":datestr
     }
     return render(request, 'main/index.html', context)
 

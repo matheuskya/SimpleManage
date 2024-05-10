@@ -5,13 +5,14 @@ Login
 {%endblock title%}
 
 {%block content%}
-<h1> LOGIN </h1>
-<br><br>
+<br>
 
+<div align="center">
+	<h1>Login</h1>
 <form method="POST" accept-charset="utf-8">
 	{%csrf_token%}
 	{{login_form.as_p}}
 	<input class = 'btn btn-primary' type='submit'value='Entrar'>
 </form>
-
+</div>
 {%endblock content%}
