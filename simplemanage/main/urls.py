@@ -15,4 +15,5 @@ urlpatterns = [
     path('cliente/<int:pk>/delete', views.ClienteDeleteView.as_view(), name='cliente_delete'),
 
     path('funcionario_list', views.FuncionarioListView.as_view(), name='funcionario_list'),
+    path('funcionario/create', views.FuncionarioCreateView.as_view(), name='funcionario_create'),
 ]

@@ -131,3 +131,14 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     login_url="login"
     template_name="main/funcionario/funcionario_list.html"
     model = Funcionario
+
+class FuncionarioCreateView(LoginRequiredMixin, CreateView):
+    login_url = "login"
+    template_name = "main/funcionario/funcionario_create.html"
+    form_class = ClienteForm
+    success_url = "/funcionario_list"
+
+    def form_valid(self, form):
+        print('FUNCAO ACESSADA', form.instance.user, self.request.user)
+        form.instance.user = self.request.user
+        return super().form_valid(form)  
