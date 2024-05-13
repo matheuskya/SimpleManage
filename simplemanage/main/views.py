@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from main.forms import LoginForm, ClienteForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
-from main.models import Cliente
+from main.models import Cliente, Funcionario
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
@@ -127,3 +127,7 @@ class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     success_url = "/cliente"
 
 
+class FuncionarioListView(LoginRequiredMixin, ListView):
+    login_url="login"
+    template_name="main/funcionario/funcionario_list.html"
+    model = Funcionario

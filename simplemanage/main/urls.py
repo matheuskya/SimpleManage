@@ -8,9 +8,11 @@ urlpatterns = [
     path('teste', views.teste, name='teste'),
     path('logout',views.logout_view, name="logout"),
     path('index', views.index, name='index'),
-    # path('cliente', views.cliente, name='cliente'),
+
     path('cliente', views.ClienteListView.as_view(), name='cliente'),
     path('cliente/create',views.ClienteCreateView.as_view(), name='cliente_create'),
     path('cliente/<int:pk>/update', views.ClienteUpdateView.as_view(), name='cliente_update'),
     path('cliente/<int:pk>/delete', views.ClienteDeleteView.as_view(), name='cliente_delete'),
+
+    path('funcionario_list', views.FuncionarioListView.as_view(), name='funcionario_list'),
 ]
