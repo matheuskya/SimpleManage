@@ -12,41 +12,13 @@ Clientes
 {%block content%}
 
 
-<h3 align="center">Cliente</h1>
-<div align="right" class='pe-5'>
-<a class='btn btn-success h1' href={%url 'cliente_create'%} method='GET'class='h3'>Novo					<i class="bi bi-plus-circle-fill"></i></a>
-<div>
 
-<div class='row ps-5 justify-content-center'>
-<table>
-<thead>
-	<tr>
-		<th>Nome</th>
-		<th>Descricao</th>
-		<th>Valor</th>
-	</tr>
-</thead>
-<tbody>
-	{%for cliente in object_list%}
-		<tr>
-			<td scope="row">{{cliente.name}}</td>
-			<td scope="row">{{cliente.description}}</td>
-			<td scope="row">{{cliente.value}}</td>
-			<td><a href="{%url 'cliente_update' cliente.id%}" class='btn btn-primary'>
-				<i class="bi bi-pencil-square"></i>
-			</a> 
-			<a href="{%url 'cliente_delete' cliente.id%}"class='btn btn-danger'>
-				<i class="bi bi-x-circle"></i>
-			</a>
-			<td>
-		</tr>
-	{%endfor%}
-</tbody>
-</table>
-</div>
-<!-- <form method="POST" accept-charet="utf-8">
-	{%csrf_token%}
-	{{cliente_form.as_p}}
-	<input type='submit' value='Cadastrar' class='btn btn-primary'>
-</form> -->
+<div align="right" class='pe-5' >
+	<h3 align="center">Clientes</h3>
+<a class='btn btn-success h1' href={%url 'cliente_create'%} method='GET'class='h3'>Novo					<i class="bi bi-plus-circle-fill"></i></a>
+
+{# {%with object="object" name="name"%} #}
+{%include "table.html"%}
+{# {%endwith%} #}
 {%endblock content%}
+</div>

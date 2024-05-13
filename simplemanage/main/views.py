@@ -11,6 +11,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
 
 # Create your views here.
+# sem valores negativos / 0 no campo value do cliente
+# criar nomes mais intuitivos para os camps (value!)
+#interface (background da table)
+#CORES USADAS (FRAPPE):https://github.com/catppuccin/catppuccin
+
+
+
+def teste(request):
+
+    return HttpResponse('pagina teste')
 
 
 def login(request):
@@ -115,3 +125,5 @@ class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "main/cliente/cliente_delete.html"
     model = Cliente
     success_url = "/cliente"
+
+

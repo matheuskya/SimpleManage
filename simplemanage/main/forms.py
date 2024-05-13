@@ -16,4 +16,9 @@ class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
         fields = ['name', 'description', 'value']
-        
+        labels = {
+            "name": "Nome",
+            "description": "Detalhes",
+            "value":"Conta"
+        }
+
