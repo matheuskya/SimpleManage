@@ -15,7 +15,7 @@ def validate_positive(value):
 class Cliente(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length = 200)
-	description = models.CharField(max_length = 200, null=True)
+	description = models.CharField(max_length = 200, blank=True)
 	value = models.FloatField(validators=[validate_positive]);
 
 	def __str__(self):
@@ -25,7 +25,7 @@ class Cliente(models.Model):
 class Funcionario(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length = 200)
-	description = models.CharField(max_length = 200, null = True)
+	description = models.CharField(max_length = 200, blank=True)
 	value = models.FloatField()
  
 	def __str__(self):
