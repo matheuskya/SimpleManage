@@ -16,4 +16,6 @@ urlpatterns = [
 
     path('funcionario_list', views.FuncionarioListView.as_view(), name='funcionario_list'),
     path('funcionario/create', views.FuncionarioCreateView.as_view(), name='funcionario_create'),
+    path('funcionario/<int:pk>/update', views.FuncionarioUpdateView.as_view(), name='funcionario_update'),
+    path('funcionario/<int:pk>/delete', views.FuncionarioDeleteView.as_view(), name='funcionario_delete')
 ]

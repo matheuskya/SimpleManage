@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from main.forms import LoginForm, ClienteForm
+from main.forms import LoginForm, ClienteForm, FuncionarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
 from main.models import Cliente, Funcionario
@@ -114,7 +114,7 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
 
 class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
-    fields = ["name", "description", "value"]
+    form_class = ClienteForm
     model = Cliente
     template_name = "main/cliente/cliente_update.html"
     success_url = "/cliente"
@@ -132,13 +132,29 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     template_name="main/funcionario/funcionario_list.html"
     model = Funcionario
 
+
 class FuncionarioCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
     template_name = "main/funcionario/funcionario_create.html"
-    form_class = ClienteForm
+    form_class = FuncionarioForm
     success_url = "/funcionario_list"
 
     def form_valid(self, form):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
-        return super().form_valid(form)  
+        return super().form_valid(form)
+
+
+class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "login"
+    form_class = FuncionarioForm
+    model = Funcionario
+    template_name = "main/cliente/funcionario_update.html"
+    success_url = "/funcionario_list"
+
+
+class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "login"
+    template_name = "main/cliente/funcionario_update.html"
+    model = Funcionario
+    success_url = "/funcionario_list"

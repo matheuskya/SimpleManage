@@ -9,14 +9,15 @@ Funcionarios
 {%endblock title%}
 
 {%block content%}
-
+<h1>{{var}}</h1>
 <div align="right" class='pe-5' >
 	<h3 align="center">Funcionarios</h3>
 <a class='btn btn-success h1' href={%url 'funcionario_create'%} method='GET'class='h3'>Novo					<i class="bi bi-plus-circle-fill"></i></a>
 
-{# {%with object="object" name="name"%} #}
+
 {%include "table.html"%}
-{# {%endwith%} #}
+
+
 </div>
 
 {%endblock content%}

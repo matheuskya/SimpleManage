@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import PasswordInput, TextInput
-from main.models import Cliente
+from main.models import Cliente, Funcionario
 
 
 class LoginForm(AuthenticationForm):
@@ -19,6 +19,17 @@ class ClienteForm(ModelForm):
         labels = {
             "name": "Nome",
             "description": "Detalhes",
-            "value":"Conta"
+            "value": "Conta"
         }
 
+
+class FuncionarioForm(ModelForm):
+
+    class Meta:
+        model = Funcionario
+        fields = ['name', 'value', 'description']
+        labels = {
+            "name": "Nome do funcionario",
+            "description": "Detalhes",
+            "value": "Conta",
+        }

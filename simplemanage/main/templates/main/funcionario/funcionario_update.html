@@ -5,19 +5,19 @@
 {%endblock navbar%}
 
 {%block title%}
-Cadastrar Funcionario
+Editar funcionario
 {%endblock title%}
 
 {%block content%}
-<h3 align="center">Cadastrar Funcionario</h3>
+<h3 align="center">Editar funcionario</h3>
 
 <div align="center" class="p-5">
 <form method="POST" accept-charset="utf-8">
 	{%csrf_token%}
 	{{form.as_p}}
 	<a class='btn btn-secondary' href="{%url 'funcionario_list'%}">Voltar</a>
-	
-	<input type="submit" class='btn btn-primary' value="Cadastrar">
+	<input type="submit" class='btn btn-primary' value="Salvar">
+
 </form>
 </div>
 {%endblock content%}
