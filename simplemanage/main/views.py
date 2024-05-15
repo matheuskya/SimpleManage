@@ -98,6 +98,7 @@ class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
     model = Cliente
+    
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
@@ -132,6 +133,12 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     template_name="main/funcionario/funcionario_list.html"
     model = Funcionario
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = "funcionario_update"
+        context['href'] = "href={%url 'funcionario_update' object.id%}"
+        return context
+
 
 class FuncionarioCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
@@ -149,12 +156,28 @@ class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
     form_class = FuncionarioForm
     model = Funcionario
-    template_name = "main/cliente/funcionario_update.html"
+    template_name = "main/funcionario/funcionario_update.html"
     success_url = "/funcionario_list"
 
 
 class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
-    template_name = "main/cliente/funcionario_update.html"
+    template_name = "main/funcionario/funcionario_update.html"
     model = Funcionario
     success_url = "/funcionario_list"
+
+
+class CardapioListView(LoginRequiredMixin, ListView):
+    pass 
+
+
+class CardapioCreateView(LoginRequiredMixin, CreateView):
+    pass 
+
+
+class CardapioUpdateView(LoginRequiredMixin, UpdateView):
+    pass 
+
+
+class CardapioDeleteView(LoginRequiredMixin, DeleteView):
+    pass
