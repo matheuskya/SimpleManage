@@ -10,15 +10,15 @@
 </thead>
 <tbody>
 	{%for object in object_list%}
-		{%if object.category == "funcionario"%}
+		{%if object.category == "custo"%}
 		<tr>
 			<td scope="row">{{object.name}}</td>
 			<td scope="row">{{object.description}}</td>
 			<td scope="row">{{object.value}}</td>
-			<td><a href="{%url 'funcionario_update' object.id%}" class='btn btn-primary'>
+			<td><a href="{%url 'cliente_update' object.id%}" class='btn btn-primary'>
 				<i class="bi bi-pencil-square"></i>
 			</a> 	
-			<a href="{%url 'funcionario_delete' object.id%}"class='btn btn-danger'>
+			<a href="{%url 'cliente_delete' object.id%}"class='btn btn-danger'>
 				<i class="bi bi-x-circle"></i>
 			</a>
 			</td>

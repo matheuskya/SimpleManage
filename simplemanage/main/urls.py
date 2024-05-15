@@ -23,4 +23,10 @@ urlpatterns = [
     path('cardapio/create', views.CardapioCreateView.as_view(), name='cardapio_create'),
     path('cardapio/<int:pk>/update', views.CardapioUpdateView.as_view(), name='cardapio_update'),
     path('cardapio/<int:pk>/delete', views.CardapioDeleteView.as_view(), name='cardapio_delete'),
+
+    path('custo_list', views.CustoListView.as_view(), name='custo_list'),
+    path('custo/create', views.CustoCreateView.as_view(), name='custo_create'),
+    path('custo/<int:pk>/update', views.CustoListView.as_view(), name='custo_update'),
+    path('custo/<int:pk>/delete', views.CustoListView.as_view(), name='custo_delete'),
+
 ]

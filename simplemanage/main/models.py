@@ -30,3 +30,20 @@ class Funcionario(models.Model):
  
 	def __str__(self):
 		return self.name
+
+
+class RegistroFinanceiro(models.Model):
+	category_list = [
+		("cliente", "cliente"),
+		("custo", "custo"),
+		("funcionario", "funcionario"),
+	]
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	name = models.CharField(max_length = 200)
+	description = models.CharField(max_length = 200, blank=True)
+	value = models.FloatField()
+	category = models.CharField(max_length = 200, choices = category_list )
+ 
+	def __str__(self):
+		return self.name
+

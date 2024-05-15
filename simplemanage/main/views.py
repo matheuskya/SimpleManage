@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from main.forms import LoginForm, ClienteForm, FuncionarioForm
+from main.forms import LoginForm, ClienteForm, FuncionarioForm, RegistroFinanceiroForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
-from main.models import Cliente, Funcionario
+from main.models import Cliente, Funcionario, RegistroFinanceiro
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
@@ -16,6 +16,8 @@ import datetime
 #interface (background da table)
 #CORES USADAS (FRAPPE):https://github.com/catppuccin/catppuccin
 
+#para realizar as mudancas de tabela (cliente, funcionario, custo) --> teste, ajustar viewList, viewCreate, viewDelete,
+#viewUpdate e tables
 
 
 def teste(request):
@@ -97,26 +99,30 @@ def index(request):
 class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
-    model = Cliente
-    
+    # model = Cliente
+    model = RegistroFinanceiro
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
     template_name = "main/cliente/cliente_create.html"
-    form_class = ClienteForm
+    # form_class = ClienteForm
+    form_class = RegistroFinanceiroForm
     success_url = "/cliente"
 
     def form_valid(self, form):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
+        form.instance.category = "cliente"
         return super().form_valid(form)
 
 
 class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
-    form_class = ClienteForm
-    model = Cliente
+    # form_class = ClienteForm
+    # model = Cliente
+    form_class = RegistroFinanceiroForm
+    model = RegistroFinanceiro
     template_name = "main/cliente/cliente_update.html"
     success_url = "/cliente"
 
@@ -124,38 +130,33 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
 class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/cliente/cliente_delete.html"
-    model = Cliente
+    model = RegistroFinanceiro
     success_url = "/cliente"
 
 
 class FuncionarioListView(LoginRequiredMixin, ListView):
     login_url="login"
     template_name="main/funcionario/funcionario_list.html"
-    model = Funcionario
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['update_url'] = "funcionario_update"
-        context['href'] = "href={%url 'funcionario_update' object.id%}"
-        return context
+    model = RegistroFinanceiro
 
 
 class FuncionarioCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
     template_name = "main/funcionario/funcionario_create.html"
-    form_class = FuncionarioForm
+    form_class = RegistroFinanceiroForm
     success_url = "/funcionario_list"
 
     def form_valid(self, form):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
+        form.instance.category = "funcionario"
         return super().form_valid(form)
 
 
 class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
-    form_class = FuncionarioForm
-    model = Funcionario
+    form_class = RegistroFinanceiroForm
+    model = RegistroFinanceiro
     template_name = "main/funcionario/funcionario_update.html"
     success_url = "/funcionario_list"
 
@@ -163,8 +164,29 @@ class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
 class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/funcionario/funcionario_update.html"
-    model = Funcionario
+    model = RegistroFinanceiro
     success_url = "/funcionario_list"
+
+
+class CustoListView(LoginRequiredMixin, ListView):
+    login_url = "login"
+    template_name = "main/custo/custo_list.html"
+    # model = Cliente
+    model = RegistroFinanceiro
+
+
+class CustoCreateView(LoginRequiredMixin, CreateView):
+    login_url = "login"
+    template_name = "main/custo/custo_create.html"
+    form_class = RegistroFinanceiroForm
+    success_url = "/custo_list"
+
+    def form_valid(self, form):
+        print('FUNCAO ACESSADA', form.instance.user, self.request.user)
+        form.instance.user = self.request.user
+        form.instance.category = "custo"
+        return super().form_valid(form)
+    
 
 
 class CardapioListView(LoginRequiredMixin, ListView):
@@ -181,3 +203,5 @@ class CardapioUpdateView(LoginRequiredMixin, UpdateView):
 
 class CardapioDeleteView(LoginRequiredMixin, DeleteView):
     pass
+
+
