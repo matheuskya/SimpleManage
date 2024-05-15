@@ -163,7 +163,7 @@ class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
 
 class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
-    template_name = "main/funcionario/funcionario_update.html"
+    template_name = "main/funcionario/funcionario_delete.html"
     model = RegistroFinanceiro
     success_url = "/funcionario_list"
 
@@ -186,7 +186,21 @@ class CustoCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.instance.category = "custo"
         return super().form_valid(form)
-    
+
+
+class CustoUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "login"
+    form_class = RegistroFinanceiroForm
+    model = RegistroFinanceiro
+    template_name = "main/custo/custo_update.html"
+    success_url = "/custo_list"
+
+
+class CustoDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "login"
+    template_name = "main/custo/custo_delete.html"
+    model = RegistroFinanceiro
+    success_url = "/custo_list"
 
 
 class CardapioListView(LoginRequiredMixin, ListView):

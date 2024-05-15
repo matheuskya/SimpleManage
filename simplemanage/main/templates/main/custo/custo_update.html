@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block navbar%}
+{%include "navbar.html"%}
+{%endblock navbar%}
+
+{%block title%}
+Editar custo
+{%endblock title%}
+
+{%block content%}
+<h3 align="center">Editar custo</h3>
+
+<div align="center" class="p-5">
+<form method="POST" accept-charset="utf-8">
+	{%csrf_token%}
+	{{form.as_p}}
+	<a class='btn btn-secondary' href="{%url 'custo_list'%}">Voltar</a>
+	<input type="submit" class='btn btn-primary' value="Salvar">
+
+</form>
+</div>
+{%endblock content%}
