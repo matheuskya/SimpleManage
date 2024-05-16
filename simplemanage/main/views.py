@@ -99,14 +99,12 @@ def index(request):
 class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
-    # model = Cliente
     model = RegistroFinanceiro
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
     template_name = "main/cliente/cliente_create.html"
-    # form_class = ClienteForm
     form_class = RegistroFinanceiroForm
     success_url = "/cliente"
 
@@ -171,7 +169,6 @@ class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
 class CustoListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/custo/custo_list.html"
-    # model = Cliente
     model = RegistroFinanceiro
 
 
@@ -204,8 +201,9 @@ class CustoDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class CardapioListView(LoginRequiredMixin, ListView):
-    pass 
-
+    login_url = "login"
+    template_name = "main/cardapio/cardapio_list.html"
+    model = RegistroFinanceiro
 
 class CardapioCreateView(LoginRequiredMixin, CreateView):
     pass 
