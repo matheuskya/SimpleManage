@@ -117,19 +117,32 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
 
 class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
-    # form_class = ClienteForm
-    # model = Cliente
     form_class = RegistroFinanceiroForm
     model = RegistroFinanceiro
     template_name = "main/cliente/cliente_update.html"
     success_url = "/cliente"
 
 
+#hard delete
 class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/cliente/cliente_delete.html"
     model = RegistroFinanceiro
     success_url = "/cliente"
+
+
+#soft delete
+@login_required(login_url='login')
+def cliente_softdelete(request, pk):
+    object = RegistroFinanceiro.objects.get(pk = pk)
+    context = {
+        "object":object
+    }
+    if (request.method == 'POST'):
+        object.state = False
+        object.save()
+        return redirect('cliente')
+    return render(request, 'main/cliente/cliente_delete.html',context)
 
 
 class FuncionarioListView(LoginRequiredMixin, ListView):
@@ -159,11 +172,26 @@ class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
     success_url = "/funcionario_list"
 
 
+#hard delete
 class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/funcionario/funcionario_delete.html"
     model = RegistroFinanceiro
     success_url = "/funcionario_list"
+
+
+#soft delete
+@login_required(login_url='login')
+def funcionario_softdelete(request, pk):
+    object = RegistroFinanceiro.objects.get(pk = pk)
+    context = {
+        "object":object
+    }
+    if (request.method == 'POST'):
+        object.state = False
+        object.save()
+        return redirect('funcionario_list')
+    return render(request, 'main/funcionario/funcionario_delete.html',context)
 
 
 class CustoListView(LoginRequiredMixin, ListView):
@@ -193,11 +221,26 @@ class CustoUpdateView(LoginRequiredMixin, UpdateView):
     success_url = "/custo_list"
 
 
+#hard delete
 class CustoDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/custo/custo_delete.html"
     model = RegistroFinanceiro
     success_url = "/custo_list"
+
+
+#soft delete
+@login_required(login_url='login')
+def custo_softdelete(request, pk):
+    object = RegistroFinanceiro.objects.get(pk = pk)
+    context = {
+        "object":object
+    }
+    if (request.method == 'POST'):
+        object.state = False
+        object.save()
+        return redirect('custo_list')
+    return render(request, 'main/custo/custo_delete.html',context)
 
 
 class CardapioListView(LoginRequiredMixin, ListView):

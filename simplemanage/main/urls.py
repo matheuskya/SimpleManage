@@ -13,11 +13,15 @@ urlpatterns = [
     path('cliente/create',views.ClienteCreateView.as_view(), name='cliente_create'),
     path('cliente/<int:pk>/update', views.ClienteUpdateView.as_view(), name='cliente_update'),
     path('cliente/<int:pk>/delete', views.ClienteDeleteView.as_view(), name='cliente_delete'),
+    path('cliente/<int:pk>/softdelete', views.cliente_softdelete, name='cliente_softdelete'),
+
 
     path('funcionario_list', views.FuncionarioListView.as_view(), name='funcionario_list'),
     path('funcionario/create', views.FuncionarioCreateView.as_view(), name='funcionario_create'),
     path('funcionario/<int:pk>/update', views.FuncionarioUpdateView.as_view(), name='funcionario_update'),
     path('funcionario/<int:pk>/delete', views.FuncionarioDeleteView.as_view(), name='funcionario_delete'),
+    path('funcionario/<int:pk>/softdelete', views.funcionario_softdelete, name='funcionario_softdelete'),
+
 
     path('cardapio_list', views.CardapioListView.as_view(), name='cardapio_list'),
     path('cardapio/create', views.CardapioCreateView.as_view(), name='cardapio_create'),
@@ -28,5 +32,5 @@ urlpatterns = [
     path('custo/create', views.CustoCreateView.as_view(), name='custo_create'),
     path('custo/<int:pk>/update', views.CustoUpdateView.as_view(), name='custo_update'),
     path('custo/<int:pk>/delete', views.CustoDeleteView.as_view(), name='custo_delete'),
-
+    path('custo/<int:pk>/softdelete', views.custo_softdelete, name='custo_softdelete'),
 ]

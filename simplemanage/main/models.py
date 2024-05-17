@@ -43,7 +43,8 @@ class RegistroFinanceiro(models.Model):
 	description = models.CharField(max_length = 200, blank=True)
 	value = models.FloatField()
 	category = models.CharField(max_length = 200, choices = category_list )
- 
+	state = models.BooleanField(default=True)
+
 	def __str__(self):
 		return self.name
 
