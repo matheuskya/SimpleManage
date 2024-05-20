@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import PasswordInput, TextInput
-from main.models import Cliente, Funcionario, RegistroFinanceiro
+from main.models import Cliente, Funcionario, RegistroFinanceiro, Cardapio
 
 
 class LoginForm(AuthenticationForm):
@@ -45,4 +45,15 @@ class FuncionarioForm(ModelForm):
             "name": "Nome do funcionario",
             "description": "Detalhes",
             "value": "Conta",
+        }
+
+
+class CardapioForm(ModelForm):
+
+    class Meta:
+        model = Cardapio
+        fields = ['name', 'description']
+        labels = {
+            "name": "Nome",
+            "description": "Detalhes",      
         }

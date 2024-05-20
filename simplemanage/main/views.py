@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from main.forms import LoginForm, ClienteForm, FuncionarioForm, RegistroFinanceiroForm
+from main.forms import LoginForm, ClienteForm, FuncionarioForm, RegistroFinanceiroForm, CardapioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
-from main.models import Cliente, Funcionario, RegistroFinanceiro
+from main.models import Cliente, Funcionario, RegistroFinanceiro, Cardapio
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
@@ -246,17 +246,32 @@ def custo_softdelete(request, pk):
 class CardapioListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cardapio/cardapio_list.html"
-    model = RegistroFinanceiro
+    model = Cardapio
 
 class CardapioCreateView(LoginRequiredMixin, CreateView):
-    pass 
+    login_url = "login"
+    template_name = "main/cardapio/cardapio_create.html"
+    form_class = CardapioForm
+    success_url = "/cardapio_list"
+
+    def form_valid(self, form):
+        print('FUNCAO ACESSADA', form.instance.user, self.request.user)
+        form.instance.user = self.request.user
+        form.instance.category = "custo"
+        return super().form_valid(form)
 
 
 class CardapioUpdateView(LoginRequiredMixin, UpdateView):
-    pass 
+    login_url = "login"
+    form_class = CardapioForm
+    model = Cardapio
+    template_name = "main/cardapio/cardapio_update.html"
+    success_url = "/cardapio_list"
+
 
 
 class CardapioDeleteView(LoginRequiredMixin, DeleteView):
-    pass
-
-
+    login_url = "login"
+    template_name = "main/cardapio/cardapio_delete.html"
+    model = Cardapio
+    success_url = "/cardapio_list"
