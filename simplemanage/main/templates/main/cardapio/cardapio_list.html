@@ -10,15 +10,24 @@ Cardápio
 
 
 {%block content%}
-
+<!--Pratos-->
 <div align="right" class='pe-5' >
 	<h3 align="center">Pratos</h3>
 <a class='btn btn-success h1' href={%url 'cardapio_create'%} method='GET'class='h3'>Novo					<i class="bi bi-plus-circle-fill"></i></a>
 
-{# {%with object="object" name="name"%} #}
 {%include "main/cardapio/cardapio_table.html"%}
-{# {%endwith%} #}
 </div>
 
 {%endblock content%}
+
+
+{%block content_2%}
+<!-- Cardapio -->
+<div align="right" class='pe-5' >
+	<h3 align="center">Cardápio</h3>
+
+{%include "main/cardapio/cardapio_dia_table.html"%}
+</div>
+
+{%endblock content_2%}
 

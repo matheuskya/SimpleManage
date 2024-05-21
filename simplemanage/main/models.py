@@ -53,6 +53,7 @@ class Cardapio(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length = 200)
 	description = models.CharField(max_length = 200, blank=True)
+	state = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name

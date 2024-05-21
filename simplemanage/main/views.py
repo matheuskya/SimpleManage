@@ -48,7 +48,7 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
+# @login_required(login_url='login')
 
 @login_required(login_url='login')
 def index(request):
@@ -269,9 +269,25 @@ class CardapioUpdateView(LoginRequiredMixin, UpdateView):
     success_url = "/cardapio_list"
 
 
-
 class CardapioDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "login"
     template_name = "main/cardapio/cardapio_delete.html"
     model = Cardapio
     success_url = "/cardapio_list"
+
+
+# @login_required(login_url='login')
+# def adicionar_cardapio(request, pk):
+#     object = Cardapio.objects.get(pk=pk)
+#     print(object)
+#     context = {
+#         "object":object,
+#     }
+#     # return redirect('cardapio_list')
+#     return render(request, "main/cardapio/cardapio_list.html", context)
+
+
+#Possiveis solucoes para o problema de transferencia de prato -> cardapio
+# Modelo cardapio foi atualizado com o campo de "status", renderizar tabela com base no valor booleano do campo
+# Ou 
+# Criar uma nova tabela, e depois clonar os valor pra ela, ou algo do tipo

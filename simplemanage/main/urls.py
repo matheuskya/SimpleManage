@@ -20,13 +20,15 @@ urlpatterns = [
     path('funcionario/create', views.FuncionarioCreateView.as_view(), name='funcionario_create'),
     path('funcionario/<int:pk>/update', views.FuncionarioUpdateView.as_view(), name='funcionario_update'),
     path('funcionario/<int:pk>/delete', views.FuncionarioDeleteView.as_view(), name='funcionario_delete'),
-    path('funcionario/<int:pk>/softdelete', views.funcionario_softdelete, name='funcionario_softdelete'),
+    path('funcionario/softdelete', views.funcionario_softdelete, name='funcionario_softdelete'),
 
 
     path('cardapio_list', views.CardapioListView.as_view(), name='cardapio_list'),
     path('cardapio/create', views.CardapioCreateView.as_view(), name='cardapio_create'),
     path('cardapio/<int:pk>/update', views.CardapioUpdateView.as_view(), name='cardapio_update'),
     path('cardapio/<int:pk>/delete', views.CardapioDeleteView.as_view(), name='cardapio_delete'),
+    # path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
+
 
     path('custo_list', views.CustoListView.as_view(), name='custo_list'),
     path('custo/create', views.CustoCreateView.as_view(), name='custo_create'),
