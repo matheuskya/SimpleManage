@@ -6,11 +6,12 @@ from django.utils.translation import gettext_lazy as _;
 
 
 def validate_positive(value):
-	if value < 0:
-		raise ValidationError(
-			_("%(value)  ddeve ser positivo"),
-			params = {"value":value}
-			)
+			if value < 0:
+				raise ValidationError(
+				_("O campo conta deve ser positivo"),
+				params = {"value":value}
+				)
+
 
 class Cliente(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -41,8 +42,8 @@ class RegistroFinanceiro(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length = 200)
 	description = models.CharField(max_length = 200, blank=True)
-	value = models.FloatField()
-	category = models.CharField(max_length = 200, choices = category_list )
+	value = models.FloatField(validators= [validate_positive])
+	category = models.CharField(max_length = 200, choices = category_list)
 	state = models.BooleanField(default=True)
 
 	def __str__(self):
