@@ -10,6 +10,7 @@
 </thead>
 <tbody>
 	{%for object in object_list%}
+		{%if object.state == False%}
 		<tr>
 			<td scope="row">{{object.name}}</td>
 			<td scope="row">{{object.description}}</td>
@@ -19,11 +20,12 @@
 			<a href="{%url 'cardapio_delete' object.id%}"class='btn btn-danger'>
 				<i class="bi bi-x-circle"></i>
 			</a>
-			<a href="{%url 'cardapio_update' object.id%}"class='btn btn-success'>
+			<a href="{%url 'adicionar_cardapio' object.id%}"class='btn btn-success'>
 				<i class="bi bi-plus-circle"></i>
 			</a>
 			</td>
 		</tr>
+		{%endif%}
 	{%endfor%}
 </tbody>
 </table>

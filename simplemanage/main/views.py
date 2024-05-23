@@ -248,12 +248,13 @@ class CardapioListView(LoginRequiredMixin, ListView):
     template_name = "main/cardapio/cardapio_list.html"
     model = Cardapio
 
+
 class CardapioCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
     template_name = "main/cardapio/cardapio_create.html"
     form_class = CardapioForm
     success_url = "/cardapio_list"
-
+ 
     def form_valid(self, form):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
@@ -276,15 +277,17 @@ class CardapioDeleteView(LoginRequiredMixin, DeleteView):
     success_url = "/cardapio_list"
 
 
-# @login_required(login_url='login')
-# def adicionar_cardapio(request, pk):
-#     object = Cardapio.objects.get(pk=pk)
-#     print(object)
-#     context = {
-#         "object":object,
-#     }
-#     # return redirect('cardapio_list')
-#     return render(request, "main/cardapio/cardapio_list.html", context)
+@login_required(login_url='login')
+def adicionar_cardapio(request, pk):
+    object = Cardapio.objects.get(pk=pk)
+    object.state = True
+    object.save()
+    print(object)
+    context = {
+        "object":object,
+    }
+    # return redirect('cardapio_list')
+    return render(request, "main/cardapio/cardapio_list.html", context)
 
 
 #Possiveis solucoes para o problema de transferencia de prato -> cardapio

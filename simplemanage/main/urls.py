@@ -27,7 +27,7 @@ urlpatterns = [
     path('cardapio/create', views.CardapioCreateView.as_view(), name='cardapio_create'),
     path('cardapio/<int:pk>/update', views.CardapioUpdateView.as_view(), name='cardapio_update'),
     path('cardapio/<int:pk>/delete', views.CardapioDeleteView.as_view(), name='cardapio_delete'),
-    # path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
+    path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
 
 
     path('custo_list', views.CustoListView.as_view(), name='custo_list'),
