@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from heyoo import WhatsApp
 import datetime
 
 # Create your views here.
@@ -100,6 +101,9 @@ class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
     model = RegistroFinanceiro
+
+    # def get_clientes(self, request):
+    #     model = RegistroFinanceiro.objects.filter(user = request.user)
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
@@ -280,17 +284,19 @@ class CardapioDeleteView(LoginRequiredMixin, DeleteView):
 @login_required(login_url='login')
 def adicionar_cardapio(request, pk):
     object = Cardapio.objects.get(pk=pk)
-    object.state = True
+    object.state = not object.state
     object.save()
     print(object)
     context = {
         "object":object,
     }
-    # return redirect('cardapio_list')
-    return render(request, "main/cardapio/cardapio_list.html", context)
+    return redirect('cardapio_list')
 
 
-#Possiveis solucoes para o problema de transferencia de prato -> cardapio
-# Modelo cardapio foi atualizado com o campo de "status", renderizar tabela com base no valor booleano do campo
-# Ou 
-# Criar uma nova tabela, e depois clonar os valor pra ela, ou algo do tipo
+def whats(self):
+    token = "EAA0qihL9XAgBO0bANggtPIY3sJ7WgVIT3OOVPS2ZCZC3OSZBzK17QtzcPzfdraNFNubLsxAbYZAvPvdWl6nfSB18wACI6wSHRpCxfXi99mgMq8qU4O4nLRihHfoSQZAoGcfr6uPZAPrTWhqRKYk1c2jwjTHJOLP0O422aL4WqgcrTw3ZC4i2ynkPyiZALXPgOy3F0S3aIlDeEOsvgebpGWwZD"
+    id = "305801675956650"
+    id_business = "309521035583753"
+    messenger = WhatsApp(token, phone_number_id=id)
+    messenger.send_message("Oi, api funcionando", "5543984590897")
+    return HttpResponse("funcionou")

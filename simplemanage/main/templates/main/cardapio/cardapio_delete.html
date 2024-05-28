@@ -16,7 +16,7 @@ Deletar Prato
 	{%csrf_token%}
 	<p>Você tem certeza que deseja deletar o prato "{{object}}"</p>
 	{{form.as_p}}
-	<a class='btn btn-danger' href='{%url "custo_list"%}'>
+	<a class='btn btn-danger' href='{%url "cardapio_list"%}'>
 		<i class="bi bi-x-lg"></i>
 	</a>
 
