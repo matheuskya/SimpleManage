@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteVi
 from django.contrib.auth.mixins import LoginRequiredMixin
 from heyoo import WhatsApp
 import datetime
+import pywhatkit
 
 # Create your views here.
 # sem valores negativos / 0 no campo value do cliente
@@ -294,9 +295,7 @@ def adicionar_cardapio(request, pk):
 
 
 def whats(self):
-    token = "EAA0qihL9XAgBO0bANggtPIY3sJ7WgVIT3OOVPS2ZCZC3OSZBzK17QtzcPzfdraNFNubLsxAbYZAvPvdWl6nfSB18wACI6wSHRpCxfXi99mgMq8qU4O4nLRihHfoSQZAoGcfr6uPZAPrTWhqRKYk1c2jwjTHJOLP0O422aL4WqgcrTw3ZC4i2ynkPyiZALXPgOy3F0S3aIlDeEOsvgebpGWwZD"
-    id = "305801675956650"
-    id_business = "309521035583753"
-    messenger = WhatsApp(token, phone_number_id=id)
-    messenger.send_message("Oi, api funcionando", "5543984590897")
-    return HttpResponse("funcionou")
+    # pywhatkit.sendwhatmsg("+5543984590897", "hello world, funcionou",0,10, 5, True, 3)
+    pywhatkit.sendwhatmsg_instantly("+5543984590897", "hello world, funcionou", 30, True, 3)
+
+    
