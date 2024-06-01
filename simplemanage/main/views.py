@@ -294,8 +294,13 @@ def adicionar_cardapio(request, pk):
     return redirect('cardapio_list')
 
 
+@login_required(login_url='login')
 def whats(self):
     # pywhatkit.sendwhatmsg("+5543984590897", "hello world, funcionou",0,10, 5, True, 3)
     pywhatkit.sendwhatmsg_instantly("+5543984590897", "hello world, funcionou", 30, True, 3)
 
+
+@login_required(login_url='login')
+def share(request):
     
+    return render(request, "main/cardapio/cardapio_share.html")    

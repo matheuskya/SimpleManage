@@ -29,6 +29,7 @@ urlpatterns = [
     path('cardapio/<int:pk>/delete', views.CardapioDeleteView.as_view(), name='cardapio_delete'),
     path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
     path("whats", views.whats, name="whats"),
+    path("share", views.share, name="share"),
 
 
     path('custo_list', views.CustoListView.as_view(), name='custo_list'),
