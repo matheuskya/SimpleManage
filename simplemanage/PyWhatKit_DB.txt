@@ -33,3 +33,23 @@ Time: 18:53
 Phone Number: +5543984590897
 Message: hello world, funcionou
 --------------------
+Date: 3/6/2024
+Time: 17:1
+Phone Number: +5543984590897
+Message: hello world, funcionou
+--------------------
+Date: 3/6/2024
+Time: 18:7
+Phone Number: +5543984590897
+Message: hello world, funcionou
+--------------------
+Date: 3/6/2024
+Time: 18:12
+Phone Number: +5543984590897
+Message: Cardapio do dia!: -1Prato-mais
+--------------------
+Date: 3/6/2024
+Time: 18:25
+Phone Number: +5543984590897
+Message: Cardapio do dia!: -1Prato-mais
+--------------------

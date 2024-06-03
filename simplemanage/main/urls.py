@@ -28,7 +28,7 @@ urlpatterns = [
     path('cardapio/<int:pk>/update', views.CardapioUpdateView.as_view(), name='cardapio_update'),
     path('cardapio/<int:pk>/delete', views.CardapioDeleteView.as_view(), name='cardapio_delete'),
     path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
-    path("whats", views.whats, name="whats"),
+    path("whats/<str:msg_cardapio>", views.whats, name="whats"),
     path("share", views.share, name="share"),
 
 

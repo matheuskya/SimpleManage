@@ -14,15 +14,16 @@ Compartilhar
 <div align="center" class="p-5">
 <form method="POST" accept-charset="utf-8">
 	{%csrf_token%}
-	<p>Você tem certeza que deseja deletar o prato "{{object}}"</p>
+	<p>Você tem certeza que deseja compartilhar a seguinte mensagem? : </p>
+	<p><strong>{{msg_cardapio}}<strong></p>
 	{{form.as_p}}
 	<a class='btn btn-danger' href='{%url "cardapio_list"%}'>
 		<i class="bi bi-x-lg"></i>
 	</a>
 
-	<button type="submit" class='btn btn-success' value="Sim">
+	<a class='btn btn-success' value="Sim" href="{%url 'whats' msg_cardapio%}">
 		<i class="bi bi-check-lg"></i>
-	</button>
+	</a>
 </form>
 </div>
 {%endblock content%}

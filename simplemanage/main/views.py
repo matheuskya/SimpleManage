@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteVi
 from django.contrib.auth.mixins import LoginRequiredMixin
 from heyoo import WhatsApp
 import datetime
+#Doc pywhatkit: https://github.com/Ankit404butfound/PyWhatKit/wiki/Sending-WhatsApp-Messages
 import pywhatkit
 
 # Create your views here.
@@ -295,12 +296,25 @@ def adicionar_cardapio(request, pk):
 
 
 @login_required(login_url='login')
-def whats(self):
-    # pywhatkit.sendwhatmsg("+5543984590897", "hello world, funcionou",0,10, 5, True, 3)
-    pywhatkit.sendwhatmsg_instantly("+5543984590897", "hello world, funcionou", 30, True, 3)
+def whats(self, msg_cardapio):
+    pywhatkit.sendwhatmsg_instantly("+5543984590897", msg_cardapio, 30, True, 3)
+    print(msg_cardapio)
+    return redirect("cardapio_list")
 
 
 @login_required(login_url='login')
 def share(request):
-    
+    if request.method == "POST":
+        context = {}
+        msg_cardapio = "Cardapio do dia!: "
+        items = request.POST.getlist("obj")
+        for item in items:
+                msg_cardapio += "\n-" + item
+        print(items)
+        print(msg_cardapio)
+        context = {
+            "msg_cardapio":msg_cardapio,
+        }
+        return render(request, "main/cardapio/cardapio_share.html", context)    
+    print("FUNCAO SHARE CHAMADA")
     return render(request, "main/cardapio/cardapio_share.html")    
