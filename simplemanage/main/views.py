@@ -23,6 +23,7 @@ import pywhatkit
 #viewUpdate e tables
 
 
+#comentario para commit de teste
 def teste(request):
 
     return HttpResponse('pagina teste')
