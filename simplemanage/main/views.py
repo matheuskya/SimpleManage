@@ -6,6 +6,7 @@ from django.contrib.auth.models import auth
 from main.models import Cliente, Funcionario, RegistroFinanceiro, Cardapio
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
+from django.views import View
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from heyoo import WhatsApp
@@ -46,6 +47,31 @@ def login(request):
         "login_form": login_form,
     }
     return render(request, 'main/login.html', context)
+
+# class Login(View):
+#     form_class = LoginForm
+#     initial = {"key":"value"}
+#     template_name = "main/login.html"
+
+#     def get(self, request, *args, **kwargs):
+#         form = self.form_class(initial = self.initial)
+#         return render(request, self.template_name, {"login_form":form})
+    
+#     def post(self, request, *args, **kwargs):
+#         form = self.form_class(request.POST)
+#         print(form)
+#         if form.is_valid():
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             # if user is not None:
+#             #     auth.login(request, user)
+#             #     return render(request,'main/index.html')
+#             # return render(request, 'main/index.html')
+#             return HttpResponse("Funcionou")
+#         return HttpResponse("Funcionou")
+        
+            
 
 
 @login_required(login_url='login')
@@ -168,7 +194,7 @@ class FuncionarioCreateView(LoginRequiredMixin, CreateView):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
         form.instance.category = "funcionario"
-        return super().form_valid(form)
+        return super().form_valid(form) 
 
 
 class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
