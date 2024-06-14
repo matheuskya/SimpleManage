@@ -10,7 +10,10 @@ Clientes
 
 
 {%block content%}
-
+<form method="GET" action="">
+	{% comment %} <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}"> {% endcomment %}
+	<button type="submit">Search</button>
+</form>
 <div align="right" class='pe-5' >
 	<h3 align="center">Clientes</h3>
 <a class='btn btn-success h1' href={%url 'cliente_create'%} method='GET'class='h3'>Novo					<i class="bi bi-plus-circle-fill"></i></a>

@@ -22,9 +22,8 @@ import pywhatkit
 
 #para realizar as mudancas de tabela (cliente, funcionario, custo) --> teste, ajustar viewList, viewCreate, viewDelete,
 #viewUpdate e tables
-
-
-#comentario para commit de teste
+        
+    
 def teste(request):
 
     return HttpResponse('pagina teste')
@@ -47,32 +46,7 @@ def login(request):
         "login_form": login_form,
     }
     return render(request, 'main/login.html', context)
-
-# class Login(View):
-#     form_class = LoginForm
-#     initial = {"key":"value"}
-#     template_name = "main/login.html"
-
-#     def get(self, request, *args, **kwargs):
-#         form = self.form_class(initial = self.initial)
-#         return render(request, self.template_name, {"login_form":form})
-    
-#     def post(self, request, *args, **kwargs):
-#         form = self.form_class(request.POST)
-#         print(form)
-#         if form.is_valid():
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
-#             user = authenticate(request, username=username, password=password)
-#             # if user is not None:
-#             #     auth.login(request, user)
-#             #     return render(request,'main/index.html')
-#             # return render(request, 'main/index.html')
-#             return HttpResponse("Funcionou")
-#         return HttpResponse("Funcionou")
-        
             
-
 
 @login_required(login_url='login')
 def logout_view(request):
@@ -91,49 +65,11 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
-# @login_required(login_url='login')
-# def cliente(request):
-#     cliente_form = ClienteForm()
-#     cliente_list = Cliente.objects.all()
-
-#     if (request.method == 'POST'):
-#         cliente_form = ClienteForm(request.POST)
-#         if cliente_form.is_valid():
-#             cliente = cliente_form.save(commit=False)
-#             cliente.user = request.user
-#             cliente.save()
-#             return redirect('index')
-#     else:
-#         context = {
-#             "cliente_list":cliente_list,
-#         }
-#         return render(request, 'main/cliente.html', context)
-
-
-# @login_required(login_url='login')
-# def cliente_post(request):
-#     cliente_form = ClienteForm()
-#     context={
-#         "cliente_form":cliente_form
-#     }
-#     if (request.method == 'POST'):
-#         cliente_form = ClienteForm(request.POST)
-#         if cliente_form.is_valid():
-#             cliente = cliente_form.save(commit=False)
-#             cliente.user = request.user
-#             cliente.save()
-#             return redirect('index')
-#     return render(request, 'main/cliente_create.html', context)
-
-
 class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
     model = RegistroFinanceiro
-
-    # def get_clientes(self, request):
-    #     model = RegistroFinanceiro.objects.filter(user = request.user)
-
+        
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
