@@ -53,3 +53,18 @@ Time: 18:25
 Phone Number: +5543984590897
 Message: Cardapio do dia!: -1Prato-mais
 --------------------
+Date: 27/7/2024
+Time: 12:40
+Phone Number: +5543984590897
+Message: Cardapio do dia!: -mais-teste[editado]
+--------------------
+Date: 27/7/2024
+Time: 12:41
+Phone Number: +5543984590897
+Message: Cardapio do dia!: -mais-teste[editado]
+--------------------
+Date: 27/7/2024
+Time: 12:41
+Phone Number: +5543984590897
+Message: Cardapio do dia!: -mais-teste[editado]
+--------------------

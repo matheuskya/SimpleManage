@@ -13,6 +13,8 @@ from heyoo import WhatsApp
 import datetime
 #Doc pywhatkit: https://github.com/Ankit404butfound/PyWhatKit/wiki/Sending-WhatsApp-Messages
 import pywhatkit
+#doc pillow: https://pillow.readthedocs.io/en/stable/
+from main.utils import generate_menu_image
 
 # Create your views here.
 # sem valores negativos / 0 no campo value do cliente
@@ -69,7 +71,7 @@ class ClienteListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cliente/cliente_list.html"
     model = RegistroFinanceiro
-        
+
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
@@ -281,3 +283,13 @@ def share(request):
         return render(request, "main/cardapio/cardapio_share.html", context)    
     print("FUNCAO SHARE CHAMADA")
     return render(request, "main/cardapio/cardapio_share.html")    
+
+
+@login_required(login_url="login")
+def menu_image_view(request):
+    img = generate_menu_image()
+
+    response = HttpResponse(content_type = "image/png")
+
+    img.save(response, "PNG")
+    return response

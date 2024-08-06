@@ -4,9 +4,10 @@ from main import views
 # from main.views import ClienteListView
 
 urlpatterns = [
+    path('teste', views.menu_image_view, name='teste'),
+
     path('', views.login, name='login'),
     # path('', views.Login.as_view(), name='login'),
-    path('teste', views.teste, name='teste'),
     path('logout',views.logout_view, name="logout"),
     path('index', views.index, name='index'),
 
