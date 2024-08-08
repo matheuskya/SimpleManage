@@ -10,7 +10,7 @@
 </thead>
 <tbody>
 
-	<form method="POST" action="/share">
+	<form method="POST" action="/menu_download">
 		{%csrf_token%}
 	{%for object in object_list%}
 		{%if object.state == True%}
@@ -24,14 +24,14 @@
 			<a href="{%url 'cardapio_delete' object.id%}"class='btn btn-danger'>
 				<i class="bi bi-x-circle"></i>
 			</a>
-			<a href="{%url 'adicionar_cardapio' object.id%}"class='btn btn-success'>
+			<a title="remover do cardapio" href="{%url 'adicionar_cardapio' object.id%}"class='btn btn-success'>
 				<i class="bi bi-arrow-down-up"></i>
 			</a>
 			</td>
 		</tr>
 		{%endif%}
 	{%endfor%}
-		<a><input type="submit" value="Compartilhar" class= "btn btn-primary"> </input> </a>
+		<a><input type="submit" value="Baixar imagem" class= "btn btn-primary"> </input> </a>
 		
 	</form>
 </table>

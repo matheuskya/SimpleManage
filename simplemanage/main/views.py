@@ -260,6 +260,7 @@ def adicionar_cardapio(request, pk):
     return redirect('cardapio_list')
 
 
+#enviar o cardapio em texto via whatsapp
 @login_required(login_url='login')
 def whats(self, msg_cardapio):
     pywhatkit.sendwhatmsg_instantly("+5543984590897", msg_cardapio, 30, True, 3)
@@ -289,7 +290,8 @@ def share(request):
 def menu_image_view(request):
     img = generate_menu_image()
 
+    #prepara a imagem para download
     response = HttpResponse(content_type = "image/png")
-
+    response["Content-Disposition"]="attachment; filename='cardapio.png'"
     img.save(response, "PNG")
     return response
