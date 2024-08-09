@@ -23,7 +23,7 @@ def generate_menu_image():
     font = ImageFont.truetype(font_path, 20)    
 
     #ajustanto o title para o centro
-    title_text = "Cardapio de hoje!"
+    title_text = "Cardapio de hoje!                    - valor kg: 51,90"
     title_bbox = d.textbbox((0, 0), title_text, font=font)
     title_width = title_bbox[2] - title_bbox[0]
     title_x = (img.width - title_width) / 2

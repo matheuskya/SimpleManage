@@ -72,6 +72,19 @@ class ClienteListView(LoginRequiredMixin, ListView):
     template_name = "main/cliente/cliente_list.html"
     model = RegistroFinanceiro
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(category='cliente')
+
+        order = self.request.GET.get('order', 'asc')
+        sort_by = self.request.GET.get('sort', 'name')
+
+        if order == "desc":
+            sort_by = f'-{sort_by}'
+
+        queryset= queryset.order_by(sort_by)
+        return queryset
+    
+
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
