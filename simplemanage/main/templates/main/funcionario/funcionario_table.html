@@ -2,9 +2,17 @@
 <table class="table table-striped-columns table-sm">
 <thead>
 	<tr>
-		<th>Nome</th>
-		<th>Descricao</th>
-		<th>Valor</th>
+		<th>             <a href="?sort=name&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}">
+			Nome
+
+		</a></th>
+		<th>                <a href="?sort=description&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}">
+			Descrição
+
+		</a></th>
+		<th>                <a href="?sort=value&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}">
+			Débito
+		</a></th>
 		<th></th>
 	</tr>
 </thead>

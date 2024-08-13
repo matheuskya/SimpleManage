@@ -22,7 +22,7 @@ urlpatterns = [
     path('funcionario/create', views.FuncionarioCreateView.as_view(), name='funcionario_create'),
     path('funcionario/<int:pk>/update', views.FuncionarioUpdateView.as_view(), name='funcionario_update'),
     path('funcionario/<int:pk>/delete', views.FuncionarioDeleteView.as_view(), name='funcionario_delete'),
-    path('funcionario/softdelete', views.funcionario_softdelete, name='funcionario_softdelete'),
+    path('funcionario/<int:pk>/softdelete', views.funcionario_softdelete, name='funcionario_softdelete'),
 
 
     path('cardapio_list', views.CardapioListView.as_view(), name='cardapio_list'),

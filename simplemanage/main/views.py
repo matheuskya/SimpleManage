@@ -133,6 +133,17 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     login_url="login"
     template_name="main/funcionario/funcionario_list.html"
     model = RegistroFinanceiro
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(category='funcionario')
+
+        order = self.request.GET.get('order', 'asc')
+        sort_by = self.request.GET.get('sort', 'name')
+
+        if order == "desc":
+            sort_by = f'-{sort_by}'
+
+        queryset= queryset.order_by(sort_by)
+        return queryset
 
 
 class FuncionarioCreateView(LoginRequiredMixin, CreateView):
@@ -182,6 +193,17 @@ class CustoListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/custo/custo_list.html"
     model = RegistroFinanceiro
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(category='custo')
+
+        order = self.request.GET.get('order', 'asc')
+        sort_by = self.request.GET.get('sort', 'name')
+
+        if order == "desc":
+            sort_by = f'-{sort_by}'
+
+        queryset= queryset.order_by(sort_by)
+        return queryset
 
 
 class CustoCreateView(LoginRequiredMixin, CreateView):
