@@ -253,6 +253,7 @@ class CardapioListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/cardapio/cardapio_list.html"
     model = Cardapio
+    extra_context = {"second_div" : True}
 
 
 class CardapioCreateView(LoginRequiredMixin, CreateView):

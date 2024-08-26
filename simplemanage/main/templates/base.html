@@ -21,7 +21,7 @@
 	{%endblock navbar%}
 	<br><br>
 
-<div class="shadow-lg m-2 p-2 w-50 mx-auto">
+<div class="shadow-lg m-2 p-2 w-75 mx-auto">
 	{%block content%}
 
 	{%block forms%}
@@ -33,10 +33,12 @@
 
 <br><br>
 
-<div class="shadow-lg m-2 p-2 w-50 mx-auto">
+{%if second_div%}
+<div class="shadow-lg m-2 p-2 w-75 mx-auto">
 {%block content_2%}
 {%endblock content_2%}
 </div> 
+{%endif%}
 
 </body>
 </html>
