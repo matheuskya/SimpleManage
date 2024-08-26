@@ -16,6 +16,7 @@ urlpatterns = [
     path('cliente/<int:pk>/update', views.ClienteUpdateView.as_view(), name='cliente_update'),
     path('cliente/<int:pk>/delete', views.ClienteDeleteView.as_view(), name='cliente_delete'),
     path('cliente/<int:pk>/softdelete', views.cliente_softdelete, name='cliente_softdelete'),
+    path('cliente/<int:pk>/value_update', views.ClienteValueUpdateView.as_view(), name='cliente_value_update'),
 
 
     path('funcionario_list', views.FuncionarioListView.as_view(), name='funcionario_list'),

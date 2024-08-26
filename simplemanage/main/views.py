@@ -128,6 +128,20 @@ def cliente_softdelete(request, pk):
         return redirect('cliente')
     return render(request, 'main/cliente/cliente_delete.html',context)
 
+class ClienteValueUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "login"
+    form_class = RegistroFinanceiroForm
+    model = RegistroFinanceiro
+    template_name = "main/cliente/cliente_update.html"
+    success_url = "/cliente"
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Only display the 'value' field, or whichever field you want
+        form.fields = {'value': form.fields['value']}
+        return form
+
+
+
 
 class FuncionarioListView(LoginRequiredMixin, ListView):
     login_url="login"

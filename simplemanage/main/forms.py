@@ -23,7 +23,6 @@ class RegistroFinanceiroForm(ModelForm):
         }
 
 
-
 class ClienteForm(ModelForm):
 
     class Meta:
