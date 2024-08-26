@@ -33,6 +33,7 @@ urlpatterns = [
     path("whats/<str:msg_cardapio>", views.whats, name="whats"),
     path("share", views.share, name="share"),
     path("menu_download", views.menu_image_view, name="menu_download"),
+    path("menu_clear", views.menu_clear, name="menu_clear"),
 
 
     path('custo_list', views.CustoListView.as_view(), name='custo_list'),

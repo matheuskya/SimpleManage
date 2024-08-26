@@ -295,6 +295,14 @@ def adicionar_cardapio(request, pk):
     }
     return redirect('cardapio_list')
 
+@login_required(login_url='login')
+def menu_clear(request):
+    object = Cardapio.objects.filter(state=1)
+    for i in object:
+        i.state = not i.state
+        i.save()
+    return redirect('cardapio_list')
+
 
 #enviar o cardapio em texto via whatsapp
 @login_required(login_url='login')
