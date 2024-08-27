@@ -15,6 +15,7 @@ import datetime
 import pywhatkit
 #doc pillow: https://pillow.readthedocs.io/en/stable/
 from main.utils import generate_menu_image
+from main.utils import create_pie_chart
 
 # Create your views here.
 # sem valores negativos / 0 no campo value do cliente
@@ -60,10 +61,12 @@ def logout_view(request):
 def index(request):
     date = datetime.datetime.now()
     datestr = date.strftime("%c")
-    print(datestr)
     context = {
         "datestr":datestr
     }
+
+    chart = create_pie_chart()
+    context["chart"]=chart
     return render(request, 'main/index.html', context)
 
 

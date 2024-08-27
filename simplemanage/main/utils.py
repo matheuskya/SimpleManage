@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 from main.models import Cardapio
 import os
 from django.conf import settings
+import plotly.graph_objects as go
+
 
 def generate_menu_image():
     #coletando dados do modelo
@@ -41,3 +43,16 @@ def generate_menu_image():
     # img.save("main/menu_image/menu_image.png")
     
     return img
+
+def create_pie_chart():
+    labels = ['categoria A', 'categoria B', 'categoria C']
+    values = ['50', '30' , '10']
+    fig = go.Figure(data = [go.Pie(labels=labels, values = values)])
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
+        plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+        width=400,                      # Set the width
+        height=300                      # Set the height
+    )
+    chart_html = fig.to_html(full_html = False)
+    return chart_html
