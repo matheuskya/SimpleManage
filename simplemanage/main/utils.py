@@ -44,15 +44,19 @@ def generate_menu_image():
     
     return img
 
-def create_pie_chart():
+def create_pie_chart(title: str):
     labels = ['categoria A', 'categoria B', 'categoria C']
     values = ['50', '30' , '10']
     fig = go.Figure(data = [go.Pie(labels=labels, values = values)])
     fig.update_layout(
+        title={
+            "x":0.5,
+        },
+        title_text = f"{title}",
         paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
         plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
         width=400,                      # Set the width
-        height=300                      # Set the height
+        height=400,                      # Set the height, valor orginal 300
     )
     chart_html = fig.to_html(full_html = False)
     return chart_html

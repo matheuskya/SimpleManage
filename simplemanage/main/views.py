@@ -65,8 +65,10 @@ def index(request):
         "datestr":datestr
     }
 
-    chart = create_pie_chart()
+    chart = create_pie_chart(title="titulo chart1")
+    chart2 = create_pie_chart(title="titulo chart2")
     context["chart"]=chart
+    context["chart2"]=chart2
     return render(request, 'main/index.html', context)
 
 
