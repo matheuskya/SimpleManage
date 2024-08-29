@@ -14,8 +14,8 @@ import datetime
 #Doc pywhatkit: https://github.com/Ankit404butfound/PyWhatKit/wiki/Sending-WhatsApp-Messages
 import pywhatkit
 #doc pillow: https://pillow.readthedocs.io/en/stable/
-from main.utils import generate_menu_image
-from main.utils import create_pie_chart
+from main.utils import *
+
 
 # Create your views here.
 # sem valores negativos / 0 no campo value do cliente
@@ -65,10 +65,15 @@ def index(request):
         "datestr":datestr
     }
 
-    chart = create_pie_chart(title="titulo chart1")
-    chart2 = create_pie_chart(title="titulo chart2")
+    chart = create_pie_chart(title="titulo chart1", category=None)
+    chart2 = create_pie_chart(title="titulo chart2", category=None)
     context["chart"]=chart
     context["chart2"]=chart2
+    registrofinanceiro_value = value_card_registrofinanceiro()
+    context["registrofinanceiro_value"] = registrofinanceiro_value
+
+    chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
+    context["chart_registrofinanceiro"] = chart_registrofinanceiro
     return render(request, 'main/index.html', context)
 
 

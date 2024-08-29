@@ -17,10 +17,19 @@ Home
         
         <br>
     </div>
-        
+    
+    <!-- cards com outras informacoes -->
     <div class="d-flex flex-row mb-3">
-        <div class=" m-1 p-1 mx-auto" style="background-color: #7287fd; border-radius: 40px; width: 450px; ">
-            {{chart|safe}}
+    <div class=" m-1 p-3 mx-auto" align="center" style="background-color: #9ca0b0; border-radius: 20px; display: inline-block; ">
+            <h4>Valor total:</h4>
+            {{registrofinanceiro_value}}
+    </div>
+    </div>
+
+    <!-- charts -->
+    <div class="d-flex flex-row mb-3">
+        <div class=" m-1 p-1 mx-auto" style="background-color: #9ca0b0; border-radius: 40px; width: 450px; ">
+            {{chart_registrofinanceiro|safe}}
         </div>
         <div class=" m-1 p-1 w-50 mx-auto">
             {{chart2|safe}}
