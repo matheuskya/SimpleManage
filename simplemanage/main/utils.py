@@ -7,9 +7,12 @@ from django.db.models import Sum
 from typing import Union
 
 
-def generate_menu_image():
+def generate_menu_image(date: str):
     #coletando dados do modelo
     menu_items = Cardapio.objects.filter(state= True)
+
+    #formatar a data
+    date = f"{date[8:10]}/{date[5:7]}/{date[0:4]}"
 
     #carregar imagem de background
     background_path = os.path.join(settings.BASE_DIR, 'main/menu_image/menu.png')
@@ -28,7 +31,7 @@ def generate_menu_image():
     font = ImageFont.truetype(font_path, 20)    
 
     #ajustanto o title para o centro
-    title_text = f"Cardapio de hoje!                    - Valor/kg: 51,90"
+    title_text = f"Cardapio de {date}                    - Valor/kg: 51,90"
     title_bbox = d.textbbox((0, 0), title_text, font=font)
     title_width = title_bbox[2] - title_bbox[0]
     title_x = (img.width - title_width) / 2
@@ -89,3 +92,4 @@ def create_registrofinanceiro_chart(title: str):
     )
     chart_html = fig.to_html(full_html = False)
     return chart_html
+

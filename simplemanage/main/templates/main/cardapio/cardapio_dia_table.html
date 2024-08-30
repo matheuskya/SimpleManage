@@ -33,13 +33,36 @@
 	{%endfor%}
 	<div style="display: flex; justify-content: flex-end; gap: 10px;">
 		<a href="{%url 'menu_clear'%}" title="Limpa o cardapio" class="btn btn-secondary">Limpar</a>
-		<button type="submit" class="btn btn-primary">Baixar imagem</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dateModal">Baixar imagem</button>
 	</div>
-	
-	
 
 	</form>
 </table>
 </tbody>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="dateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="dateModalLabel">Data de publicacao do cardapio</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'menu_download' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <label for="menuDate">Data:</label>
+                    <input type="date" id="menuDate" name="menu_date" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Salvar e baixar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 

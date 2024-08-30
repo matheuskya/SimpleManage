@@ -4,8 +4,6 @@ from main import views
 # from main.views import ClienteListView
 
 urlpatterns = [
-    path('teste', views.menu_image_view, name='teste'),
-
     path('', views.login, name='login'),
     # path('', views.Login.as_view(), name='login'),
     path('logout',views.logout_view, name="logout"),
@@ -33,7 +31,7 @@ urlpatterns = [
     path('cardapio/adicionar_cardapio/<int:pk>', views.adicionar_cardapio, name='adicionar_cardapio'),
     path("whats/<str:msg_cardapio>", views.whats, name="whats"),
     path("share", views.share, name="share"),
-    path("menu_download", views.menu_image_view, name="menu_download"),
+    path("menu_download", views.menu_download, name="menu_download"),
     path("menu_clear", views.menu_clear, name="menu_clear"),
 
 

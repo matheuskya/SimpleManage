@@ -355,11 +355,13 @@ def share(request):
 
 
 @login_required(login_url="login")
-def menu_image_view(request):
-    img = generate_menu_image()
-
-    #prepara a imagem para download
-    response = HttpResponse(content_type = "image/png")
-    response["Content-Disposition"]="attachment; filename='cardapio.png'"
-    img.save(response, "PNG")
-    return response
+def menu_download(request):
+    if request.method == "POST":
+        menu_date = request.POST.get("menu_date")
+        img = generate_menu_image(menu_date)
+        print(menu_date)
+        #prepara a imagem para download
+        response = HttpResponse(content_type = "image/png")
+        response["Content-Disposition"]="attachment; filename='cardapio.png'"
+        img.save(response, "PNG")
+        return response
