@@ -33,7 +33,7 @@ cd simplemanage
 
 5. Rode o projeto
 ```bash
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 6. Acesse o site em http://localhost:8000/ (ou no link que aparece no terminal)
