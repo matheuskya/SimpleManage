@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'pywhatkit',
-    'heyoo',
+    # 'pywhatkit',
+    # 'heyoo',
     'main',
     'django.contrib.admin',
     'django.contrib.auth',

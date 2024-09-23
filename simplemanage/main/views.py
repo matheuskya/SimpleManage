@@ -9,10 +9,10 @@ from django.views.generic import ListView
 from django.views import View
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from heyoo import WhatsApp
+# from heyoo import WhatsApp
 import datetime
 #Doc pywhatkit: https://github.com/Ankit404butfound/PyWhatKit/wiki/Sending-WhatsApp-Messages
-import pywhatkit
+# import pywhatkit
 #doc pillow: https://pillow.readthedocs.io/en/stable/
 from main.utils import *
 
@@ -329,11 +329,11 @@ def menu_clear(request):
 
 
 #enviar o cardapio em texto via whatsapp
-@login_required(login_url='login')
-def whats(self, msg_cardapio):
-    pywhatkit.sendwhatmsg_instantly("+5543984590897", msg_cardapio, 30, True, 3)
-    print(msg_cardapio)
-    return redirect("cardapio_list")
+# @login_required(login_url='login')
+# def whats(self, msg_cardapio):
+#     pywhatkit.sendwhatmsg_instantly("+5543984590897", msg_cardapio, 30, True, 3)
+#     print(msg_cardapio)
+#     return redirect("cardapio_list")
 
 
 @login_required(login_url='login')
