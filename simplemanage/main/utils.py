@@ -5,7 +5,8 @@ from django.conf import settings
 import plotly.graph_objects as go
 from django.db.models import Sum
 from typing import Union
-
+from datetime import datetime, timedelta
+from django.utils.timezone import now
 
 def generate_menu_image(date: str):
     #coletando dados do modelo
@@ -97,3 +98,39 @@ def create_registrofinanceiro_chart(title: str):
     chart_html = fig.to_html(full_html = False)
     return chart_html
 
+def calculate_trend():
+    # Get the current date and time
+    today = now()
+    
+    # Define the current period (e.g., current month)
+    start_of_current_period = today.replace(day=1)  # Start of current month
+    
+    # Define the previous period (e.g., previous month)
+    start_of_previous_period = (start_of_current_period - timedelta(days=1)).replace(day=1)
+    end_of_previous_period = start_of_current_period - timedelta(days=1)  # End of last month
+
+    # Query total costs for the current period
+    current_period_costs = RegistroFinanceiro.objects.filter(
+        date__gte=start_of_current_period, 
+        state=1
+    ).aggregate(Sum('value'))['value__sum'] or 0
+
+    # Query total costs for the previous period
+    previous_period_costs = RegistroFinanceiro.objects.filter(
+        date__range=(start_of_previous_period, end_of_previous_period),
+        state=1
+    ).aggregate(Sum('value'))['value__sum'] or 0
+
+    # Calculate the trend percentage (growth or decline)
+    if previous_period_costs == 0:
+        trend = 0 if current_period_costs == 0 else 100  # Avoid division by zero
+    else:
+        trend = ((current_period_costs - previous_period_costs) / previous_period_costs) * 100
+
+    # Return the trend and a status
+    if trend > 0:
+        return f"Costs increased by {trend:.2f}%"
+    elif trend < 0:
+        return f"Costs decreased by {abs(trend):.2f}%"
+    else:
+        return "No change in costs"
