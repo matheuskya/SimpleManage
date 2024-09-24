@@ -71,6 +71,10 @@ def value_card_registrofinanceiro():
     total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
     return total
 
+def card_clientes_ativos():
+    total_active_clients = RegistroFinanceiro.objects.filter(state=1).filter(category="cliente").count()  
+    return total_active_clients
+
 def create_registrofinanceiro_chart(title: str):
     category_values=['cliente', 'funcionario', 'custo']
     labels = ['Cliente', 'Funcionario', 'Custos']

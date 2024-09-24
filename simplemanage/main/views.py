@@ -71,6 +71,8 @@ def index(request):
     context["chart2"]=chart2
     registrofinanceiro_value = value_card_registrofinanceiro()
     context["registrofinanceiro_value"] = registrofinanceiro_value
+    total_clientes_card = card_clientes_ativos()
+    context["total_clientes_card"] = total_clientes_card
 
     chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
