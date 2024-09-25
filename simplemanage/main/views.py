@@ -76,8 +76,7 @@ def index(request):
     context["registrofinanceiro_value"] = registrofinanceiro_value
     total_clientes_card = card_clientes_ativos()
     context["total_clientes_card"] = total_clientes_card
-    # trend_info = calculate_trend()
-    # context["trend_info"] = trend_info
+
 
     chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
