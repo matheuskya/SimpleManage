@@ -107,16 +107,26 @@ def create_trend_chart():
     values = [record.value for record in records]
     dates = [record.created_at for record in records]
 
+    # x_values = [record.created_at for record in records]  # Assuming you have a created_at field
+    y_values = [record.value for record in records]
+
     # Create the trend line chart
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=dates, y=values, mode='lines+markers', name='Total Expenses'))
+    fig.add_trace(go.Scatter(x=dates,mode='lines+markers', name='Total Expenses'))
 
     # Set chart title and labels
     fig.update_layout(
-        title='Custos / Gasto ao longo do tempo',
+        title_text='Custos / Gasto ao longo do tempo',
+        title={
+            "x":0.5,
+        },
         xaxis_title='Data',
-        yaxis_title='Valor total'
+        yaxis_title='Valor total',
+                paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
+        plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+                width=400,                      # Set the width
+        height=400,            # Set the height, valor orginal 300
     )
 
     return fig.to_html(full_html=False)

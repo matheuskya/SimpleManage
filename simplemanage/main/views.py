@@ -66,10 +66,10 @@ def index(request):
     }
 
     #mock charts
-    chart = create_pie_chart(title="titulo chart1", category=None)
-    chart2 = create_pie_chart(title="titulo chart2", category=None)
-    context["chart"]=chart
-    context["chart2"]=chart2
+    # chart = create_pie_chart(title="titulo chart1", category=None)
+    # chart2 = create_pie_chart(title="titulo chart2", category=None)
+    # context["chart"]=chart
+    # context["chart2"]=chart2
 
     #instanciando graficos e enviando pro contexto
     registrofinanceiro_value = value_card_registrofinanceiro()
