@@ -2,6 +2,7 @@ from django.db import models;
 from django.contrib.auth.models import User;
 from django.core.exceptions import ValidationError;
 from django.utils.translation import gettext_lazy as _;
+from django.utils import timezone
 # Create your models here.
 
 
@@ -45,7 +46,8 @@ class RegistroFinanceiro(models.Model):
 	value = models.FloatField(validators= [validate_positive])
 	category = models.CharField(max_length = 200, choices = category_list)
 	state = models.BooleanField(default=True)
-
+	created_at = models.DateTimeField(default=timezone.now)
+	
 	def __str__(self):
 		return self.name
 

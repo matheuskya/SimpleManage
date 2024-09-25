@@ -98,3 +98,25 @@ def create_registrofinanceiro_chart(title: str):
     chart_html = fig.to_html(full_html = False)
     return chart_html
 
+
+def create_trend_chart():
+    # Filter for active entries and order them by date
+    records = RegistroFinanceiro.objects.filter(state=1).order_by('created_at')
+
+    # Get values and dates
+    values = [record.value for record in records]
+    dates = [record.created_at for record in records]
+
+    # Create the trend line chart
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=dates, y=values, mode='lines+markers', name='Total Expenses'))
+
+    # Set chart title and labels
+    fig.update_layout(
+        title='Custos / Gasto ao longo do tempo',
+        xaxis_title='Data',
+        yaxis_title='Valor total'
+    )
+
+    return fig.to_html(full_html=False)
