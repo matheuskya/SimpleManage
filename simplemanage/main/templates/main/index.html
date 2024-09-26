@@ -1,52 +1,130 @@
 {%extends 'base.html'%}
-
 {%block navbar%}
 {%include 'navbar.html'%}
 {%endblock navbar%}
-
-{%block title%}
-Home
-{%endblock%}
-
+{%block title%} Home {%endblock title%}
 {%block content%}
-<br>
+
+<br />
+
 <div>
     <div align="center">
         <h4>Bem-vindo {{request.user}}</h4>
         <h5>{{datestr}}</h5>
-        
-        <br>
+
+        <br />
     </div>
-    
+
     <!-- cards com outras informacoes -->
     <div class="d-flex flex-row mb-3">
-    <div class=" m-1 p-3 mx-auto" align="center" style="background-color: #9ca0b0; border-radius: 20px; display: inline-block; ">
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
             <h4>Valor total:</h4>
             {{registrofinanceiro_value}}
+        </div>
     </div>
-    <div class=" m-1 p-3 mx-auto" align="center" style="background-color: #9ca0b0; border-radius: 20px; display: inline-block; ">
+
+
+    <div class="d-flex flex-row mb-3">
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
+            <h4>$ Clientes:</h4>
+            {{cliente_value}}
+        </div>
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
+            <h4>$ Funcionarios:</h4>
+            {{funcionario_value}}
+        </div>
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
+            <h4>$ Custos:</h4>
+            {{custo_value}}
+        </div>
+    </div>
+    <div>
+    <div class="d-flex flex-row mb-3">
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
             <h4>Clientes Ativos:</h4>
             {{total_clientes_card}}
+        </div>
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
+            <h4>Entradas de funcionarios:</h4>
+            {{total_funcionarios_card}}
+        </div>
+        <div
+            class="m-1 p-3 mx-auto"
+            align="center"
+            style="
+                background-color: #9ca0b0;
+                border-radius: 20px;
+                display: inline-block;
+            "
+        >
+            <h4>Entradas de custos:</h4>
+            {{total_custos_card}}
+        </div>
     </div>
-    </div>
-
-
-
 
     <!-- charts -->
     <div class="d-flex flex-row mb-3">
-        <div class=" m-1 p-1 mx-auto" style="background-color: #9ca0b0; border-radius: 40px; width: 450px; ">
+        <div
+            class="m-1 p-1 mx-auto"
+            style="background-color: #9ca0b0; border-radius: 40px; width: 450px"
+        >
             {{chart_registrofinanceiro|safe}}
         </div>
 
-            <div class="m-1 p-1 d-flex justify-content-center align-items-center" style="background-color: #9ca0b0; border-radius: 40px; width: 450px;">
-                {{trend_chart|safe}}
-            </div>
-
-
+        <div
+            class="m-1 p-1 d-flex justify-content-center align-items-center"
+            style="background-color: #9ca0b0; border-radius: 40px; width: 450px"
+        >
+            {{trend_chart|safe}}
+        </div>
     </div>
-
-
-
 </div>
-    {%endblock content%}
+{%endblock content%}

@@ -25,8 +25,8 @@ from main.utils import *
 
 #para realizar as mudancas de tabela (cliente, funcionario, custo) --> teste, ajustar viewList, viewCreate, viewDelete,
 #viewUpdate e tables
-        
-    
+
+
 def teste(request):
 
     return HttpResponse('pagina teste')
@@ -49,7 +49,7 @@ def login(request):
         "login_form": login_form,
     }
     return render(request, 'main/login.html', context)
-            
+
 
 @login_required(login_url='login')
 def logout_view(request):
@@ -65,19 +65,26 @@ def index(request):
         "datestr":datestr
     }
 
-    #mock charts
-    # chart = create_pie_chart(title="titulo chart1", category=None)
-    # chart2 = create_pie_chart(title="titulo chart2", category=None)
-    # context["chart"]=chart
-    # context["chart2"]=chart2
-
-    #instanciando graficos e enviando pro contexto
-    registrofinanceiro_value = value_card_registrofinanceiro()
+    #instanciando graficos e cards eenviando pro contexto
+    #cards de valor
+    registrofinanceiro_value = create_value_card("")
     context["registrofinanceiro_value"] = registrofinanceiro_value
-    total_clientes_card = card_clientes_ativos()
+    cliente_value = create_value_card("cliente")
+    context["cliente_value"] = cliente_value
+    funcionario_value = create_value_card("funcionario")
+    context["funcionario_value"] = funcionario_value
+    custo_value = create_value_card("custo")
+    context["custo_value"] = custo_value
+
+    #cards de entrada
+    total_clientes_card = create_active_card("cliente")
     context["total_clientes_card"] = total_clientes_card
     trend_chart = create_trend_chart()
     context["trend_chart"] = trend_chart
+    total_funcionarios_card = create_active_card("funcionario")
+    context["total_funcionarios_card"] = total_funcionarios_card
+    total_custos_card = create_active_card("custo")
+    context["total_custos_card"] = total_custos_card
 
     chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
@@ -100,7 +107,7 @@ class ClienteListView(LoginRequiredMixin, ListView):
 
         queryset= queryset.order_by(sort_by)
         return queryset
-    
+
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
@@ -187,7 +194,7 @@ class FuncionarioCreateView(LoginRequiredMixin, CreateView):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
         form.instance.category = "funcionario"
-        return super().form_valid(form) 
+        return super().form_valid(form)
 
 
 class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
@@ -292,7 +299,7 @@ class CardapioCreateView(LoginRequiredMixin, CreateView):
     template_name = "main/cardapio/cardapio_create.html"
     form_class = CardapioForm
     success_url = "/cardapio_list"
- 
+
     def form_valid(self, form):
         print('FUNCAO ACESSADA', form.instance.user, self.request.user)
         form.instance.user = self.request.user
@@ -356,9 +363,9 @@ def share(request):
         context = {
             "msg_cardapio":msg_cardapio,
         }
-        return render(request, "main/cardapio/cardapio_share.html", context)    
+        return render(request, "main/cardapio/cardapio_share.html", context)
     print("FUNCAO SHARE CHAMADA")
-    return render(request, "main/cardapio/cardapio_share.html")    
+    return render(request, "main/cardapio/cardapio_share.html")
 
 
 @login_required(login_url="login")

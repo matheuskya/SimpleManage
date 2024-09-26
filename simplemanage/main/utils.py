@@ -29,7 +29,7 @@ def generate_menu_image(date: str):
 
     #pegando fonte ttf
     font_path = os.path.join(settings.BASE_DIR, "main/fonts/aovel-sans-rounded-font/AovelSansRounded-rdDL.ttf")
-    font = ImageFont.truetype(font_path, 20)    
+    font = ImageFont.truetype(font_path, 20)
 
     #ajustanto o title para o centro
     title_text = f"Cardapio de {date}                    - Valor/kg: 51,90"
@@ -45,9 +45,9 @@ def generate_menu_image(date: str):
         d.text((10, y_text), text, fill=(0,0,0), font=font)
         y_text += 40
 
-    #salvar imagem no folder especificado   
+    #salvar imagem no folder especificado
     # img.save("main/menu_image/menu_image.png")
-    
+
     return img
 
 def create_pie_chart(title: str, category: Union[str, None]):
@@ -68,12 +68,22 @@ def create_pie_chart(title: str, category: Union[str, None]):
     print(category)
     return chart_html
 
-def value_card_registrofinanceiro():
-    total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
+def create_value_card(categoria: str):
+    if categoria != "":
+        if categoria == "cliente":
+            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+        elif categoria == "funcionario":
+            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+        elif categoria == "custo":
+            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+        else:
+            total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
+    else:
+        total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
     return total
 
-def card_clientes_ativos():
-    total_active_clients = RegistroFinanceiro.objects.filter(state=1).filter(category="cliente").count()  
+def create_active_card(category: str):
+    total_active_clients = RegistroFinanceiro.objects.filter(state=1).filter(category=category).count()
     return total_active_clients
 
 def create_registrofinanceiro_chart(title: str):
@@ -99,34 +109,64 @@ def create_registrofinanceiro_chart(title: str):
     return chart_html
 
 
+# def create_trend_chart():
+#     # Filter for active entries and order them by date
+#     records = RegistroFinanceiro.objects.filter(state=1).order_by('created_at')
+
+#     # Get values and dates
+#     values = [record.value for record in records]
+#     dates = [record.created_at for record in records]
+
+#     # x_values = [record.created_at for record in records]  # Assuming you have a created_at field
+#     y_values = [record.value for record in records]
+
+#     # Create the trend line chart
+#     fig = go.Figure()
+
+#     fig.add_trace(go.Scatter(x=dates,mode='lines+markers', name='Total Expenses'))
+
+#     # Set chart title and labels
+#     fig.update_layout(
+#         title_text='Custos / Gasto ao longo do tempo',
+#         title={
+#             "x":0.5,
+#         },
+#         xaxis_title='Data',
+#         yaxis_title='Valor total',
+#         paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
+#         plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+#         width=400,                      # Set the width
+#         height=400,            # Set the height, valor orginal 300
+#     )
+
+#     return fig.to_html(full_html=False)
+
+
 def create_trend_chart():
     # Filter for active entries and order them by date
-    records = RegistroFinanceiro.objects.filter(state=1).order_by('created_at')
+    records = RegistroFinanceiro.objects.filter(state=True).order_by('created_at')
 
     # Get values and dates
     values = [record.value for record in records]
     dates = [record.created_at for record in records]
 
-    # x_values = [record.created_at for record in records]  # Assuming you have a created_at field
-    y_values = [record.value for record in records]
-
     # Create the trend line chart
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=dates,mode='lines+markers', name='Total Expenses'))
+    fig.add_trace(go.Scatter(x=dates, y=values, mode='lines+markers', name='Total Expenses'))
 
     # Set chart title and labels
     fig.update_layout(
-        title_text='Custos / Gasto ao longo do tempo',
-        title={
-            "x":0.5,
-        },
-        xaxis_title='Data',
-        yaxis_title='Valor total',
+                title_text='Custos / Gasto ao longo do tempo',
+                title={
+                    "x":0.5,
+                },
+                xaxis_title='Data',
+                yaxis_title='Valor total',
                 paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-        plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+                plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
                 width=400,                      # Set the width
-        height=400,            # Set the height, valor orginal 300
+                height=400,            # Set the height, valor orginal 300
     )
 
     return fig.to_html(full_html=False)
