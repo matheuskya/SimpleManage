@@ -8,6 +8,7 @@ from typing import Union
 from datetime import datetime, timedelta
 from django.utils.timezone import now
 
+
 def generate_menu_image(date: str):
     #coletando dados do modelo
     menu_items = Cardapio.objects.filter(state= True)
@@ -170,3 +171,6 @@ def create_trend_chart():
     )
 
     return fig.to_html(full_html=False)
+
+def test_line_chart():
+    pass

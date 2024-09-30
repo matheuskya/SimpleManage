@@ -86,8 +86,10 @@ def index(request):
     total_custos_card = create_active_card("custo")
     context["total_custos_card"] = total_custos_card
 
+    #charts
     chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
+
     return render(request, 'main/index.html', context)
 
 

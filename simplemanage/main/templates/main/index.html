@@ -1,9 +1,4 @@
-{%extends 'base.html'%}
-{%block navbar%}
-{%include 'navbar.html'%}
-{%endblock navbar%}
-{%block title%} Home {%endblock title%}
-{%block content%}
+{%extends 'base.html'%} {%block navbar%} {%include 'navbar.html'%} {%endblock navbar%} {%block title%} Home {%endblock title%} {%block content%}
 
 <br />
 
@@ -30,7 +25,6 @@
             {{registrofinanceiro_value}}
         </div>
     </div>
-
 
     <div class="d-flex flex-row mb-3">
         <div
@@ -71,59 +65,68 @@
         </div>
     </div>
     <div>
-    <div class="d-flex flex-row mb-3">
-        <div
-            class="m-1 p-3 mx-auto"
-            align="center"
-            style="
-                background-color: #9ca0b0;
-                border-radius: 20px;
-                display: inline-block;
-            "
-        >
-            <h4>Clientes Ativos:</h4>
-            {{total_clientes_card}}
-        </div>
-        <div
-            class="m-1 p-3 mx-auto"
-            align="center"
-            style="
-                background-color: #9ca0b0;
-                border-radius: 20px;
-                display: inline-block;
-            "
-        >
-            <h4>Entradas de funcionarios:</h4>
-            {{total_funcionarios_card}}
-        </div>
-        <div
-            class="m-1 p-3 mx-auto"
-            align="center"
-            style="
-                background-color: #9ca0b0;
-                border-radius: 20px;
-                display: inline-block;
-            "
-        >
-            <h4>Entradas de custos:</h4>
-            {{total_custos_card}}
-        </div>
-    </div>
-
-    <!-- charts -->
-    <div class="d-flex flex-row mb-3">
-        <div
-            class="m-1 p-1 mx-auto"
-            style="background-color: #9ca0b0; border-radius: 40px; width: 450px"
-        >
-            {{chart_registrofinanceiro|safe}}
+        <div class="d-flex flex-row mb-3">
+            <div
+                class="m-1 p-3 mx-auto"
+                align="center"
+                style="
+                    background-color: #9ca0b0;
+                    border-radius: 20px;
+                    display: inline-block;
+                "
+            >
+                <h4>Clientes Ativos:</h4>
+                {{total_clientes_card}}
+            </div>
+            <div
+                class="m-1 p-3 mx-auto"
+                align="center"
+                style="
+                    background-color: #9ca0b0;
+                    border-radius: 20px;
+                    display: inline-block;
+                "
+            >
+                <h4>Entradas de funcionarios:</h4>
+                {{total_funcionarios_card}}
+            </div>
+            <div
+                class="m-1 p-3 mx-auto"
+                align="center"
+                style="
+                    background-color: #9ca0b0;
+                    border-radius: 20px;
+                    display: inline-block;
+                "
+            >
+                <h4>Entradas de custos:</h4>
+                {{total_custos_card}}
+            </div>
         </div>
 
-        <div
-            class="m-1 p-1 d-flex justify-content-center align-items-center"
-            style="background-color: #9ca0b0; border-radius: 40px; width: 450px"
-        >
-            {{trend_chart|safe}}
+        <!-- charts -->
+        <div class="d-flex flex-row mb-3">
+            <div
+                class="m-1 p-1 mx-auto"
+                style="
+                    background-color: #9ca0b0;
+                    border-radius: 40px;
+                    width: 450px;
+                "
+            >
+                {{chart_registrofinanceiro|safe}}
+            </div>
+
+            <div
+                class="m-1 p-1 d-flex justify-content-center align-items-center"
+                style="
+                    background-color: #9ca0b0;
+                    border-radius: 40px;
+                    width: 450px;
+                "
+            >
+                {{trend_chart|safe}}
+            </div>
         </div>
     </div>
 </div>
