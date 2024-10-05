@@ -60,35 +60,38 @@ def logout_view(request):
 @login_required(login_url='login')
 def index(request):
     date = datetime.now()
-    datestr = date.strftime("%c")
+    datestr = date.strftime("%d/%m/%y %H:%M:%S")
     context = {
         "datestr":datestr
     }
 
     #instanciando graficos e cards eenviando pro contexto
     #cards de valor
-    registrofinanceiro_value = create_value_card("")
+    registrofinanceiro_value = create_value_card("", request)
     context["registrofinanceiro_value"] = registrofinanceiro_value
-    cliente_value = create_value_card("cliente")
+    cliente_value = create_value_card("cliente", request)
     context["cliente_value"] = cliente_value
-    funcionario_value = create_value_card("funcionario")
+    funcionario_value = create_value_card("funcionario", request)
     context["funcionario_value"] = funcionario_value
-    custo_value = create_value_card("custo")
+    custo_value = create_value_card("custo", request)
     context["custo_value"] = custo_value
 
     #cards de entrada
-    total_clientes_card = create_active_card("cliente")
+    total_clientes_card = create_active_card("cliente", request)
     context["total_clientes_card"] = total_clientes_card
-    trend_chart = create_trend_chart()
-    context["trend_chart"] = trend_chart
-    total_funcionarios_card = create_active_card("funcionario")
+
+    total_funcionarios_card = create_active_card("funcionario", request)
     context["total_funcionarios_card"] = total_funcionarios_card
-    total_custos_card = create_active_card("custo")
+    total_custos_card = create_active_card("custo", request)
     context["total_custos_card"] = total_custos_card
 
     #charts
-    chart_registrofinanceiro = create_registrofinanceiro_chart(title="Custos totais")
+    chart_registrofinanceiro = create_registrofinanceiro_chart("Custos totais", request)
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
+    trend_chart = create_trend_chart(request)
+    context["trend_chart"] = trend_chart
+
+
 
     return render(request, 'main/index.html', context)
 

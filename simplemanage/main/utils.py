@@ -7,6 +7,8 @@ from django.db.models import Sum
 from typing import Union
 from datetime import datetime, timedelta
 from django.utils.timezone import now
+from django.db.models.functions import TruncMonth
+# from django.http import HttpRequest
 
 
 def generate_menu_image(date: str):
@@ -69,31 +71,31 @@ def create_pie_chart(title: str, category: Union[str, None]):
     print(category)
     return chart_html
 
-def create_value_card(categoria: str):
+def create_value_card(categoria: str, request):
     if categoria != "":
         if categoria == "cliente":
-            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).filter(user=request.user).aggregate(Sum('value'))['value__sum'] or 0
         elif categoria == "funcionario":
-            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+            total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum'] or 0
         elif categoria == "custo":
-            total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum']
+            total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum'] or 0
         else:
-            total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
+            total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
     else:
-        total = RegistroFinanceiro.objects.filter(state=1).aggregate(Sum('value'))['value__sum']
-    return total
+        total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
+    return total if total is not None else 0
 
-def create_active_card(category: str):
-    total_active_clients = RegistroFinanceiro.objects.filter(state=1).filter(category=category).count()
+def create_active_card(category: str, request):
+    total_active_clients = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=category).count()
     return total_active_clients
 
-def create_registrofinanceiro_chart(title: str):
+def create_registrofinanceiro_chart(title: str, request):
     category_values=['cliente', 'funcionario', 'custo']
     labels = ['Cliente', 'Funcionario', 'Custos']
     values = [
-        RegistroFinanceiro.objects.filter(category=category_values[0], state=1).aggregate(Sum('value'))['value__sum'] or 0,
-        RegistroFinanceiro.objects.filter(category=category_values[1], state=1).aggregate(Sum('value'))['value__sum'] or 0,
-        RegistroFinanceiro.objects.filter(category=category_values[2], state=1).aggregate(Sum('value'))['value__sum'] or 0,
+        RegistroFinanceiro.objects.filter(user=request.user).filter(category=category_values[0], state=1).aggregate(Sum('value'))['value__sum'] or 0,
+        RegistroFinanceiro.objects.filter(user=request.user).filter(category=category_values[1], state=1).aggregate(Sum('value'))['value__sum'] or 0,
+        RegistroFinanceiro.objects.filter(user=request.user).filter(category=category_values[2], state=1).aggregate(Sum('value'))['value__sum'] or 0,
     ]
     fig = go.Figure(data = [go.Pie(labels=labels, values = values)])
     fig.update_layout(
@@ -107,6 +109,7 @@ def create_registrofinanceiro_chart(title: str):
         height=400,                      # Set the height, valor orginal 300
     )
     chart_html = fig.to_html(full_html = False)
+
     return chart_html
 
 
@@ -143,9 +146,9 @@ def create_registrofinanceiro_chart(title: str):
 #     return fig.to_html(full_html=False)
 
 
-def create_trend_chart():
+def create_trend_chart(request):
     # Filter for active entries and order them by date
-    records = RegistroFinanceiro.objects.filter(state=True).order_by('created_at')
+    records = RegistroFinanceiro.objects.filter(user=request.user).filter(state=True).order_by('created_at')
 
     # Get values and dates
     values = [record.value for record in records]
