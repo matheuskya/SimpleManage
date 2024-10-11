@@ -83,7 +83,7 @@ def create_value_card(categoria: str, request):
             total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
     else:
         total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
-    return total if total is not None else 0
+    return round(total, 2) if total is not None else 0
 
 def create_active_card(category: str, request):
     total_active_clients = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=category).count()
