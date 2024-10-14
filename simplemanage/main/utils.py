@@ -3,11 +3,13 @@ from main.models import Cardapio, RegistroFinanceiro
 import os
 from django.conf import settings
 import plotly.graph_objects as go
+import plotly.express as px
 from django.db.models import Sum
 from typing import Union
 from datetime import datetime, timedelta
 from django.utils.timezone import now
 from django.db.models.functions import TruncMonth
+from django.db.models.functions import ExtractMonth, ExtractYear
 # from django.http import HttpRequest
 
 
@@ -175,5 +177,51 @@ def create_trend_chart(request):
 
     return fig.to_html(full_html=False)
 
-def test_line_chart():
-    pass
+def create_monthly_expense_chart(request):
+    months=['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+    records = RegistroFinanceiro.objects.filter(user=request.user).filter(state=True).order_by('created_at')
+
+    records_formatado=[0,0,0,0,0,0,0,0,0,0,0,0]
+    #formatando dados para lista
+    for i in records:
+        index = i.created_at.month - 1
+        if i.created_at.month == 1:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 2:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 3:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 4:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 5:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 6:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 7:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 8:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 9:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 10:
+            records_formatado[index] = i.value + records_formatado[index]
+        elif i.created_at.month == 11:
+            records_formatado[index] = i.value + records_formatado[index]
+
+    print(records_formatado)
+
+    fig = go.Figure([go.Bar(x=months, y=records_formatado)])
+
+    fig.update_layout(
+                    title_text='Custos / Gasto ao longo do tempo',
+                    title={
+                        "x":0.5,
+                    },
+                    # xaxis_title='Data',
+                    # yaxis_title='Valor total',
+                    paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
+                    plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+                    width=400,                      # Set the width
+                    height=400,            # Set the height, valor orginal 300
+        )
+    return fig.to_html(full_html=False)
