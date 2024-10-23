@@ -77,8 +77,6 @@ def create_value_card(categoria: str, request):
     if categoria != "":
         if categoria == "cliente":
             total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).filter(user=request.user).aggregate(Sum('value'))['value__sum'] or 0
-            print(total)
-            print(type(total))
         elif categoria == "funcionario":
             total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum'] or 0
         elif categoria == "custo":
@@ -87,7 +85,13 @@ def create_value_card(categoria: str, request):
             total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
     else:
         total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).aggregate(Sum('value'))['value__sum'] or 0
-    return round(total, 2) if total is not None else 0
+    total = round(float(total),2)
+    total = str(total)
+    for i in total:
+        if i == '.':
+            total = total.replace('.', ',')
+    # return round(float(total), 2) if total is not None else 0
+    return total
 
 def create_active_card(category: str, request):
     total_active_clients = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=category).count()

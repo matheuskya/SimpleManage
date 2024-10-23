@@ -102,7 +102,7 @@ class ClienteListView(LoginRequiredMixin, ListView):
     model = RegistroFinanceiro
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(category='cliente')
+        queryset = super().get_queryset().filter(category='cliente').filter(user=self.request.user)
 
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
@@ -177,7 +177,7 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     template_name="main/funcionario/funcionario_list.html"
     model = RegistroFinanceiro
     def get_queryset(self):
-        queryset = super().get_queryset().filter(category='funcionario')
+        queryset = super().get_queryset().filter(category='funcionario').filter(user=self.request.user)
 
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
@@ -237,7 +237,7 @@ class CustoListView(LoginRequiredMixin, ListView):
     template_name = "main/custo/custo_list.html"
     model = RegistroFinanceiro
     def get_queryset(self):
-        queryset = super().get_queryset().filter(category='custo')
+        queryset = super().get_queryset().filter(category='custo').filter(user=self.request.user)
 
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
@@ -297,6 +297,9 @@ class CardapioListView(LoginRequiredMixin, ListView):
     template_name = "main/cardapio/cardapio_list.html"
     model = Cardapio
     extra_context = {"second_div" : True}
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 class CardapioCreateView(LoginRequiredMixin, CreateView):
