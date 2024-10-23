@@ -88,8 +88,6 @@ def index(request):
     #charts
     chart_registrofinanceiro = create_registrofinanceiro_chart("Custos totais", request)
     context["chart_registrofinanceiro"] = chart_registrofinanceiro
-    trend_chart = create_trend_chart(request)
-    context["trend_chart"] = trend_chart
     bar_chart = create_monthly_expense_chart(request)
     context["bar_chart"] = bar_chart
 

@@ -77,6 +77,8 @@ def create_value_card(categoria: str, request):
     if categoria != "":
         if categoria == "cliente":
             total = RegistroFinanceiro.objects.filter(state=1).filter(category=categoria).filter(user=request.user).aggregate(Sum('value'))['value__sum'] or 0
+            print(total)
+            print(type(total))
         elif categoria == "funcionario":
             total = RegistroFinanceiro.objects.filter(user=request.user).filter(state=1).filter(category=categoria).aggregate(Sum('value'))['value__sum'] or 0
         elif categoria == "custo":
@@ -106,7 +108,7 @@ def create_registrofinanceiro_chart(title: str, request):
         },
         title_text = f"{title}",
         paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-        plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+        # plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
         width=400,                      # Set the width
         height=400,                      # Set the height, valor orginal 300
     )
@@ -114,68 +116,6 @@ def create_registrofinanceiro_chart(title: str, request):
 
     return chart_html
 
-
-# def create_trend_chart():
-#     # Filter for active entries and order them by date
-#     records = RegistroFinanceiro.objects.filter(state=1).order_by('created_at')
-
-#     # Get values and dates
-#     values = [record.value for record in records]
-#     dates = [record.created_at for record in records]
-
-#     # x_values = [record.created_at for record in records]  # Assuming you have a created_at field
-#     y_values = [record.value for record in records]
-
-#     # Create the trend line chart
-#     fig = go.Figure()
-
-#     fig.add_trace(go.Scatter(x=dates,mode='lines+markers', name='Total Expenses'))
-
-#     # Set chart title and labels
-#     fig.update_layout(
-#         title_text='Custos / Gasto ao longo do tempo',
-#         title={
-#             "x":0.5,
-#         },
-#         xaxis_title='Data',
-#         yaxis_title='Valor total',
-#         paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-#         plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
-#         width=400,                      # Set the width
-#         height=400,            # Set the height, valor orginal 300
-#     )
-
-#     return fig.to_html(full_html=False)
-
-
-def create_trend_chart(request):
-    # Filter for active entries and order them by date
-    records = RegistroFinanceiro.objects.filter(user=request.user).filter(state=True).order_by('created_at')
-
-    # Get values and dates
-    values = [record.value for record in records]
-    dates = [record.created_at for record in records]
-
-    # Create the trend line chart
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatter(x=dates, y=values, mode='lines+markers', name='Total Expenses'))
-
-    # Set chart title and labels
-    fig.update_layout(
-                title_text='Custos / Gasto ao longo do tempo',
-                title={
-                    "x":0.5,
-                },
-                xaxis_title='Data',
-                yaxis_title='Valor total',
-                paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-                plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
-                width=400,                      # Set the width
-                height=400,            # Set the height, valor orginal 300
-    )
-
-    return fig.to_html(full_html=False)
 
 def create_monthly_expense_chart(request):
     months=['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
@@ -213,15 +153,17 @@ def create_monthly_expense_chart(request):
     fig = go.Figure([go.Bar(x=months, y=records_formatado)])
 
     fig.update_layout(
-                    title_text='Custos / Gasto ao longo do tempo',
+                    title_text='Custos / Gastos ao longo do tempo',
                     title={
                         "x":0.5,
                     },
                     # xaxis_title='Data',
                     # yaxis_title='Valor total',
                     paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-                    plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+                    # plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
                     width=400,                      # Set the width
                     height=400,            # Set the height, valor orginal 300
         )
+
+    #
     return fig.to_html(full_html=False)

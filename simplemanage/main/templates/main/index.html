@@ -23,8 +23,8 @@
                 width: 90%;
             "
         >
-            <h4>Valor total:</h4>
-            {{registrofinanceiro_value}}
+            <h4>Valor total</h4>
+            R$:{{registrofinanceiro_value}}
         </div>
     </div>
 
@@ -41,7 +41,7 @@
         >
             <h4>Clientes</h4>
             <br />
-            <p>Valor: {{cliente_value}}</p>
+            <p>Valor R$:{{cliente_value}}</p>
 
             <p>Ativos: {{total_clientes_card}}</p>
 
@@ -59,7 +59,7 @@
         >
             <h4>Funcionários</h4>
             <br />
-            <p>Valor: {{funcionario_value}}</p>
+            <p>Valor R$: {{funcionario_value}}</p>
 
 
             <p>Ativos: {{total_funcionarios_card}}</p>
@@ -78,57 +78,19 @@
         >
             <h4>Custos</h4>
             <br />
-            <p>Valor: {{custo_value}}</p>
+            <p>Valor R$: {{custo_value}}</p>
 
 
             <p>Ativos: {{total_custos_card}}</p>
         </div>
     </div>
 
-    <!-- <div>
-        <div class="d-flex flex-row mb-3">
-            <div
-                class="m-1 p-3 mx-auto"
-                align="center"
-                style="
-                    background-color: #9ca0b0;
-                    border-radius: 20px;
-                    display: inline-block;
-                "
-            >
-                <h4>Clientes Ativos:</h4>
-                {{total_clientes_card}}
-            </div>
-            <div
-                class="m-1 p-3 mx-auto"
-                align="center"
-                style="
-                    background-color: #9ca0b0;
-                    border-radius: 20px;
-                    display: inline-block;
-                "
-            >
-                <h4>Entradas de funcionarios:</h4>
-                {{total_funcionarios_card}}
-            </div>
-            <div
-                class="m-1 p-3 mx-auto"
-                align="center"
-                style="
-                    background-color: #9ca0b0;
-                    border-radius: 20px;
-                    display: inline-block;
-                "
-            >
-                <h4>Entradas de custos:</h4>
-                {{total_custos_card}}
-            </div>
-        </div> -->
+
 
         <!-- charts -->
-        <div class="d-flex flex-row mb-3">
+        <div class="d-flex flex-row mb-3 ">
             <div
-                class="m-1 p-1 mx-auto"
+                class="m-1 p-1 d-flex justify-content-center align-items-center"
                 style="
                     background-color: #9ca0b0;
                     border-radius: 40px;
@@ -146,10 +108,9 @@
                     width: 50%;
                 "
             >
-                <!-- {{trend_chart|safe}} -->
                 {{bar_chart|safe}}
             </div>
-            <!-- trend_chart -->
+
         </div>
     </div>
 </div>
