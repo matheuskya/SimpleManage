@@ -29,7 +29,7 @@ class Funcionario(models.Model):
 	name = models.CharField(max_length = 200)
 	description = models.CharField(max_length = 200, blank=True)
 	value = models.FloatField()
- 
+
 	def __str__(self):
 		return self.name
 
@@ -40,14 +40,14 @@ class RegistroFinanceiro(models.Model):
 		("custo", "custo"),
 		("funcionario", "funcionario"),
 	]
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user    = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length = 200)
 	description = models.CharField(max_length = 200, blank=True)
 	value = models.FloatField(validators= [validate_positive])
 	category = models.CharField(max_length = 200, choices = category_list)
 	state = models.BooleanField(default=True)
 	created_at = models.DateTimeField(default=timezone.now)
-	
+
 	def __str__(self):
 		return self.name
 
