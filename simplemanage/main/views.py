@@ -15,6 +15,7 @@ import datetime
 # import pywhatkit
 #doc pillow: https://pillow.readthedocs.io/en/stable/
 from main.utils import *
+from django.db.models import Q
 
 
 # Create your views here.
@@ -101,18 +102,42 @@ class ClienteListView(LoginRequiredMixin, ListView):
     template_name = "main/cliente/cliente_list.html"
     model = RegistroFinanceiro
 
+    # def get_queryset(self):
+    #     queryset = super().get_queryset().filter(category='cliente').filter(user=self.request.user)
+
+    #     order = self.request.GET.get('order', 'asc')
+    #     sort_by = self.request.GET.get('sort', 'name')
+
+    #     if order == "desc":
+    #         sort_by = f'-{sort_by}'
+
+    #     queryset= queryset.order_by(sort_by)
+    #     return queryset
     def get_queryset(self):
         queryset = super().get_queryset().filter(category='cliente').filter(user=self.request.user)
 
+        # Get search query from URL parameters
+        search_query = self.request.GET.get('search', '')
+
+        # Apply search filter if there's a query
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query)
+            )
+            # Existing sorting logic
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
 
         if order == "desc":
             sort_by = f'-{sort_by}'
 
-        queryset= queryset.order_by(sort_by)
+        queryset = queryset.order_by(sort_by)
         return queryset
-
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['search_query'] = self.request.GET.get('search', '')
+            return context
 
 
 class ClienteCreateView(LoginRequiredMixin, CreateView):
@@ -176,18 +201,42 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
     login_url="login"
     template_name="main/funcionario/funcionario_list.html"
     model = RegistroFinanceiro
+    # def get_queryset(self):
+    #     queryset = super().get_queryset().filter(category='funcionario').filter(user=self.request.user)
+
+    #     order = self.request.GET.get('order', 'asc')
+    #     sort_by = self.request.GET.get('sort', 'name')
+
+    #     if order == "desc":
+    #         sort_by = f'-{sort_by}'
+
+    #     queryset= queryset.order_by(sort_by)
+    #     return queryset
     def get_queryset(self):
         queryset = super().get_queryset().filter(category='funcionario').filter(user=self.request.user)
 
+        # Get search query from URL parameters
+        search_query = self.request.GET.get('search', '')
+
+        # Apply search filter if there's a query
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query)
+            )
+            # Existing sorting logic
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
 
         if order == "desc":
             sort_by = f'-{sort_by}'
 
-        queryset= queryset.order_by(sort_by)
+        queryset = queryset.order_by(sort_by)
         return queryset
-
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['search_query'] = self.request.GET.get('search', '')
+            return context
 
 class FuncionarioCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
@@ -236,18 +285,42 @@ class CustoListView(LoginRequiredMixin, ListView):
     login_url = "login"
     template_name = "main/custo/custo_list.html"
     model = RegistroFinanceiro
+    # def get_queryset(self):
+    #     queryset = super().get_queryset().filter(category='custo').filter(user=self.request.user)
+
+    #     order = self.request.GET.get('order', 'asc')
+    #     sort_by = self.request.GET.get('sort', 'name')
+
+    #     if order == "desc":
+    #         sort_by = f'-{sort_by}'
+
+    #     queryset= queryset.order_by(sort_by)
+    #     return queryset
     def get_queryset(self):
         queryset = super().get_queryset().filter(category='custo').filter(user=self.request.user)
 
+        # Get search query from URL parameters
+        search_query = self.request.GET.get('search', '')
+
+        # Apply search filter if there's a query
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query)
+            )
+            # Existing sorting logic
         order = self.request.GET.get('order', 'asc')
         sort_by = self.request.GET.get('sort', 'name')
 
         if order == "desc":
             sort_by = f'-{sort_by}'
 
-        queryset= queryset.order_by(sort_by)
+        queryset = queryset.order_by(sort_by)
         return queryset
-
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['search_query'] = self.request.GET.get('search', '')
+            return context
 
 class CustoCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
